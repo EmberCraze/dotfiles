@@ -12,16 +12,15 @@ type pip3 >/dev/null 2>&1 || {
 
 PACKAGES=(
     "pip"
-    "setuptools"
-    "vim-vint"
-    "poetry"
-    "black"
+    # "setuptools"
+    # "poetry"
+    # "black"
     "pynvim"
-    "pylint"
-    'virtualenvwrapper'
-    'requests'
-    'ipdb',
-	'vobject' # Mutt calendar script
+    # "pylint"
+    # 'virtualenvwrapper'
+    # 'requests'
+    # 'ipdb',
+	# 'vobject' # Mutt calendar script
 )
 
 FLAGS=''

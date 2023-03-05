@@ -109,8 +109,8 @@ main() {
   brew install ripgrep
 
   # Programming Languages
-  brew install go
-  brew install ruby
+  # brew install go
+  # brew install ruby
 
 
   # A cat(1) clone with syntax highlighting and Git integration.
@@ -141,42 +141,42 @@ main() {
   brew install woff2
   
   # Install other useful binaries
-  brew install the_silver_searcher
+  # brew install the_silver_searcher
   brew install zsh
   brew install git
-  brew install imagemagick --with-webp
-  brew install pv
-  brew install rename
-  brew install tree
-  brew install zopfli
+  # brew install imagemagick --with-webp
+  # brew install pv
+  # brew install rename
+  # brew install tree
+  # brew install zopfli
   brew install ffmpeg --with-libvpx
-  brew install speedtest_cli
-  brew install ssh-copy-id
-  brew install testssl
+  # brew install speedtest_cli
+  # brew install ssh-copy-id
+  # brew install testssl
   brew install openssh
   brew install rsync
   brew install gcc --enable-all-languages
   brew install htop
-  brew install nmap
+  # brew install nmap
   brew install gzip
   brew install terminal-notifier
   brew install jq
   brew install lsd
 
   # corrects your previous console command
-  brew install thefuck
+  # brew install thefuck
   # find where your diskspace went
-  brew install ncdu
+  # brew install ncdu
   # Mysql CLI autoCompletion and syntax highlighting
-  brew install mycli
+  # brew install mycli
   # Postgres CLI autocompletion and syntax highlighting
-  brew install pgcli
+  # brew install pgcli
   
   # Universal command-line interface for SQL databases
   # 1- Add xo tap
-  brew tap xo/xo
+  # brew tap xo/xo
   # 2- Install usql with "most" drivers
-  brew install usql
+  # brew install usql
 
   # Remove outdated versions from the cellar
   brew cleanup
