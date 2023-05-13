@@ -1,6 +1,0 @@
-require('snippets.all')
-require('snippets.javascript')
-require('snippets.jest')
-require('snippets.markdown')
-require('snippets.react')
-require('snippets.typescript')
