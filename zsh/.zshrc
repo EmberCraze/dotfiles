@@ -1,144 +1,80 @@
-# ---------------------------------------------
-# .zshrc
-# ---------------------------------------------
-# This file should be used to set up the paths for the shell. This file
-# should not produce any output.
+#  _____    _
+# |__  /___| |__  _ __ ___
+#   / // __| '_ \| '__/ __|
+#  / /_\__ \ | | | | | (__
+# /____|___/_| |_|_|  \___|
+# Aliases for a few useful commands
 
-# PATH Glob Options
-# (N-/).... do not register if the directory does not exists
-# N........ NULL_GLOB option (ignore path if it does not match the glob)
-# n........ sort the output
-# [-1]..... select the last item in the array
-# -........ follow the symbol links
-# /........ ignore files
+alias mirrorUpdate='reflector --country us --latest 15 --protocol https --sort rate --save /etc/pacman.d/mirrorlist --verbose'
+alias pacmanGhost='~/.scripts/pacman.sh'
+alias shivita='toilet -f mono12 -F rainbow 'andrea' | ponythink -f winona'
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+alias ip='ip -c'
+alias rm='rm -i'
+alias x='ranger'
+alias h='htop'
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath manpath path
+setopt COMPLETE_ALIASES
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt appendhistory
+setopt autocd
+setopt extendedglob
+setopt incappendhistory
+setopt nomatch
+setopt notify
+setopt sharehistory
 
-fpath=(
-    ${ZDOTDIR:-$HOME}/functions/functions.zwc(N-)
-    ${ZDOTDIR:-$HOME}/completions/completions.zwc(N-)
-    ${ZDOTDIR:-$HOME}/functions(N-/)
-    ${ZDOTDIR:-$HOME}/completions(N-/)
-    ${ZDOTDIR:-$HOME}/prompt/prompt.zwc(N-)
-    ${ZDOTDIR:-$HOME}/prompt/functions(N-/)
-    /opt/homebrew/share/zsh/site-functions(N-/)
-    ${fpath}
-)
+unsetopt beep
+bindkey -e
+autoload -Uz compinit promptinit bashcompinit
+compinit
+promptinit
+bashcompinit
+zstyle :compinstall filename '$HOME/.zshrc'
+complete -o nospace -C /usr/bin/vault vault
+complete -o nospace -C /usr/bin/terraform terraform
 
-() {
-    setopt EXTENDED_GLOB
-    autoload -Uz ${ZDOTDIR:-$HOME}/functions/^*.zwc*
-    autoload -Uz ${ZDOTDIR:-$HOME}/completions/^*.zwc*
-
-    autoload -U promptinit; promptinit
-    # Set Spaceship ZSH as a prompt
-    prompt spaceship
-}
-
-# Get the original manpath, then modify it.
-(( $+commands[manpath] )) && MANPATH="`manpath`"
-manpath=(
-    ${HOMEBREW_PREFIX:-/usr/local}/opt/*/libexec/gnuman(N-/)
-    "$manpath[@]"
-)
-
-infopath=(
- /usr/local/share/info
- $infopath
-)
-
-# Set the the list of directories that cd searches.
-cdpath=(
-  $cdpath
-)
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-    ./bin(N-/)
-    ./node_modules/.bin
-    ${ZDOTDIR}/bin(N-/)
-    ${HOME}/.bin/local(N-/)
-    ${HOME}/.bin(N-/)
-    ${HOME}/.cargo/bin(N-/)
-    ${HOME}/.volta/bin(N-/) # https://volta.sh
-    ${XDG_CONFIG_HOME}/yarn/global/node_modules/.bin(N-/)
-    ${GOPATH}/bin(N-/)
-    ${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin(N-/)
-    ${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin(N-/)
-    ${HOMEBREW_PREFIX:-/opt/homebrew}/opt/findutils/libexec/gnubin(N-/)
-    ${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin(N-/)
-    $HOME/Library/Python/3.*/bin(Nn[-1]-/)
-    ${HOMEBREW_PREFIX:-/opt/homebrew}/{bin,sbin}(N-/)
-    $path
-)
-
-# ┌────────────────┐
-# │ Configurations │
-# └────────────────┘
-#
-# The array is used to load the settings in the desired order
-zconfig=(
-    zplug
-    completion
-    compdefs
-    environment
-    gpg
-    history
-    mappings
-    prompt
-    editor
-    aliases
-    fzf
-    direnv
-)
-
-for config (${ZDOTDIR:-$HOME}/config/${^zconfig}.zsh) source $config && unset config
-
-# ┌────┐
-# │ FZ │
-# └────┘
-export FZ_HISTORY_CD_CMD="_zlua"
-
-#  ┌────────────────────────────────────────────────────────┐
-#  │ Make sure git completions are the good ones            │
-#  │ For reference: https://github.com/github/hub/pull/1962 │
-#  └────────────────────────────────────────────────────────┘
-if [ "$(uname)" = "Darwin" ]; then
-    if [[ -d /opt/homebrew ]]; then
-        (
-        if [ -e /opt/homebrew/zsh/site-functions/_git ]; then
-            command mv -f /opt/homebrew/share/zsh/site-functions/{,disabled.}_git 2>/dev/null
-            command mv -f /opt/homebrew/share/zsh/site-functions/{,disabled.}git-completion.bash 2>/dev/null
-        fi
-        ) &!
-    fi
-
-    if [[ -d /usr/local ]]; then
-        (
-        if [ -e /usr/local/share/zsh/site-functions/_git ]; then
-            command mv -f /usr/local/share/zsh/site-functions/{,disabled.}_git 2>/dev/null
-            command mv -f /usr/local/share/zsh/site-functions/{,disabled.}git-completion.bash 2>/dev/null
-        fi
-        ) &!
-    fi
-
-
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# ┌────────────────────┐
-# │ Load local configs │
-# └────────────────────┘
+plugins=(
+    colorize
+    copyfile
+    docker
+    docker-compose
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+    fast-syntax-highlighting
+    zsh-autocomplete
+    git
+    gitfast
+    golang
+    history-substring-search
+    kubectl
+    rust
+    safe-paste
+    tmux
+    virtualenv
+)
 
-if [[ -f ${HOME}/.zshrc.local ]]; then
-    source $HOME/.zshrc.local
-else
-    [[ -z "${HOMEBREW_GITHUB_API_TOKEN}" ]] && echo "⚠ HOMEBREW_GITHUB_API_TOKEN not set." && _has_unset_config=yes
-    [[ -z "${GITHUB_TOKEN}" ]] && echo "⚠ GITHUB_TOKEN not set." && _has_unset_config=yes
-    [[ -z "${NPM_REGISTRY_TOKEN}" ]] && echo "⚠ NPM_REGISTRY_TOKEN not set." && _has_unset_config=yes
-    [[ -z "${GITHUB_REGISTRY_TOKEN}" ]] && echo "⚠ GITHUB_REGISTRY_TOKEN not set." && _has_unset_config=yes
-    [[ -z "${GH_PASS}" ]] && echo "⚠ GH_PASS not set." && _has_unset_config=yes
-    [[ ${_has_unset_config:-no} == "yes" ]] && echo "Set the missing configs in ~/.zshrc"
-fi
+# Source Oh My ZSH for plugins and zsh-autosuggestions, zsh-syntax-highlighting,
+# zsh-history-substring-search and the powerlevel10k theme.
+while IFS= read -r script
+do
+    source "$script"
+done < <(find /usr/share/zsh/plugins/ -maxdepth 2 -type f -name "*.zsh" ! -name '*plugin.zsh')
+source $ZSH/oh-my-zsh.sh
+# source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

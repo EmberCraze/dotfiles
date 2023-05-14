@@ -1,4 +1,0 @@
-#  vim: set ts=4 sw=4 tw=80 ft=zsh et :
-# Monitor ZSH
-
-for i in $(seq 5); do time zsh -i -c exit; done;

@@ -1,106 +1,28 @@
-# ---------------------------------------------
-# Profile
-# ---------------------------------------------
-# Uncomment the line below and start a new shell. Don't forget to uncomment the
-# `zprof` on .zshrc
-# zmodload zsh/zprof
+export LC_ALL=en_US.UTF-8
+export TERMINAL=alacritty
+export PAGER=less
+export VISUAL=nvim
+export EDITOR=nvim
+export TERM="xterm-256color"
+export GPG_TTY=$(tty)
 
-# set -o noclobber
+export RANGER_LOAD_DEFAULT_RC=FALSE
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=1000
+export DISABLE_AUTO_UPDATE="true"
+export ZSH=/usr/share/oh-my-zsh
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+# export MOZ_ENABLE_WAYLAND=1
+# export MOZ_USE_XINPUT2=1
+# export MOZ_DBUS_REMOTE=1
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+# source ~/.zshenv_secret
 
-# True color
-export COLORTERM='truecolor'
-if [ $(command -v vivid) ]; then
-   export LS_COLORS=$(vivid generate ayu)
-fi
-# ---------------------------------------------
-# Environment
-# ---------------------------------------------
-# export ZDOTDIR="${${(%):-%N}:A:h}"
-export ZDOTDIR="$HOME/.zsh"
-export ZPLUG_HOME="${HOME}/.zplug"
-export ZPLUG_THREADS=32
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export XDG_DATA_HOME=${XDG_DATA_HOME_HOME:-$HOME/.local/share}
-export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
-export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-# export ZSH=$HOME/.oh-my-zsh
+# PIP
+export PATH=$HOME/.local/bin:$PATH
 
-# ---------------------------------------------
-# Homebrew
-# ---------------------------------------------
-export HOMEBREW_INSTALL_BADGE="🍄"
-# M1 Macs will install to /opt/homebrew
-if [[ -d /opt/homebrew ]]; then
-  export HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-"/opt/homebrew"}
-  export HOMEBREW_CELLAR=${HOMEBREW_CELLAR:-"/opt/homebrew/Cellar"}
-  export HOMEBREW_REPOSITORY=${HOMEBREW_REPOSITORY:-"/opt/homebrew"}
-fi
-# Intel Macs will install to /usr/local
-if [[ -d /usr/local ]]; then
-  export HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-"/usr/local"}
-  export HOMEBREW_CELLAR=${HOMEBREW_CELLAR:-"/usr/local/Cellar"}
-  export HOMEBREW_REPOSITORY=${HOMEBREW_REPOSITORY:-"/usr/local/Homebrew"}
-fi
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_FORCE_BREWED_GIT=1
-
-# ---------------------------------------------
-# Telemetry
-# ---------------------------------------------
-export DO_NOT_TRACK=1
-export GATSBY_TELEMETRY_DISABLED=1
-
-# ---------------------------------------------
-# Python
-# ---------------------------------------------
-export PYTHONSTARTUP="${HOME}/.pyrc.py"
-
-# ---------------------------------------------
-# Direnv
-# ---------------------------------------------
-if [ $(command -v direnv) ]; then
-   export NODE_VERSIONS="${HOME}/.node-versions"
-   export NODE_VERSION_PREFIX=""
-   eval "$(direnv hook zsh)"
-fi
-
-# ---------------------------------------------
-# HUB
-# ---------------------------------------------
-if [ $(command -v hub) ]; then
-	eval "$(hub alias -s)"
-fi
-
-# ---------------------------------------------
-# Others
-# ---------------------------------------------
-export BAT_CONFIG_PATH="${HOME}/.batrc"
-export RIPGREP_CONFIG_PATH="${HOME}/.rgrc"
-# Supress some npm ads
-export ADBLOCK=1
-
-# ---------------------------------------------
-# Environment settings
-# ---------------------------------------------
-export OSTYPE=$(uname -s)
-export HOSTNAME=$(hostname)
-export DOTFILES="${HOME}/dotfiles"
-export GOPATH="${HOME}/.go"
-export GOBIN="${GOPATH}/bin"
-export PROJECTS="${HOME}/Projects"
-export NOTES_DIR="${HOME}/Documents/notes"
-export ZK_NOTEBOOK_DIR="$NOTES_DIR"
-# I use a single zk notes dir, so set it and forget
-export ZK_NOTEBOOK_DIR=$NOTES_DIR
-export GPG_TTY=`tty`
-
-# Ensure that a non-login, non-interactive shell has a defined environment.
-# (Only once) if it was not sourced before, becuase .zshenv is always sourced
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-${HOME}/dotfiles/zsh}/.zprofile" ]]; then
-  source "${ZDOTDIR:-${HOME}/dotfiles/zsh}/.zprofile"
-fi
-
-if [[ -f ${HOME}/.zshenv.local ]]; then
-    source ${HOME}.zshenv.local
-fi
+export PATH="$HOME/.local/bin:$PATH"
+export npm_config_prefix="$HOME/.local"
