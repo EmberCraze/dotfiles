@@ -128,7 +128,7 @@ install_package_manager() {
     nix-channel --add https://nixos.org/channels/nixpkgs-unstable
     nix-channel --update
 
-    # Install stow for dotfile management 
+    # Install stow for dotfile management
     nix-env -f "<nixpkgs>" -iA stow
 
   else
@@ -206,14 +206,18 @@ install_zsh() {
 
 		print_in_purple "\n • Installing ZSH\n\n"
 
-    nix-env -f "<nixpkgs>" -iA zsh
+		nix-env -f "<nixpkgs>" -iA zsh
+	else
+		print_info "ZSH already installed, nothing to do here skipping ... 💨"
+	fi
 
-		# Switching ZSH shell
+	# Switching ZSH shell
 
     print_in_purple "\n • Switching to ZSH Shell\n\n"
-    chsh -s $(which zsh)
+    chsh -s "/bin/zsh"
+	print_warning "You'll need to log out for this to take effect!"
 
-#		local BREW_ZSH_PATH="/usr/local/bin/zsh"
+	# local NIX_ZSH_PATH="/usr/local/bin/zsh"
 #		if ! grep -q "$BREW_ZSH_PATH" /etc/shells; then
 #
 #			print_in_purple "\n • Switching to ZSH Shell\n\n"
@@ -227,14 +231,10 @@ install_zsh() {
 #
 #			echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null
 #			chsh -s "$ZSH_PATH" "$(whoami)"
-#			print_warning "You'll need to log out for this to take effect!"
 #		else
 #			print_info "No need to switch shell, you are using Homebrew zsh already"
 #		fi
 #
-	else
-		print_info "ZSH already installed, nothing to do here skipping ... 💨"
-	fi
 
 	finish
 }
@@ -281,10 +281,10 @@ install_zsh() {
 #}
 
 symlink_files() {
-  print_info "Trying to detect if you have already cloned Ahmed's dotfiles..."
+  print_info "Trying to detect if you have already cloned the dotfiles..."
 
   if [[ -d $DOTFILES ]]; then
-    print_info "Seems like you have Ahmed's dotfiles installed!"
+    print_info "Seems like you have the dotfiles installed!"
 
     print_in_purple "\n • Create local config files\n\n"
 
@@ -299,7 +299,7 @@ symlink_files() {
       #make gpg
 
   else
-    print_info "You don't Ahmed's dotfiles $DOTFILES in your machine!"
+    print_info "You don't the dotfiles $DOTFILES in your machine!"
   fi
 }
 
