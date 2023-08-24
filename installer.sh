@@ -131,6 +131,8 @@ install_package_manager() {
     # Install stow for dotfile management
     nix-env -f "<nixpkgs>" -iA stow
 
+	# Add nix to path
+
   else
     print_info "You already have Nix installed, nothing to do here skipping... 💨"
   fi

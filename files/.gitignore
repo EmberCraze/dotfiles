@@ -8,6 +8,7 @@
 !bugwarrior
 !fzf
 !git
+!alacritty
 !glow
 !neofetch
 !karabiner
@@ -18,6 +19,7 @@
 !tmux
 !nvim
 !i3
+!i3status-rust
 !vifm
 !yabai
 !zathura
