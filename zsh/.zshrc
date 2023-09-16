@@ -24,6 +24,7 @@ fi
 # alias rm='rm -i'
 # alias x='ranger'
 # alias h='htop'
+alias glo='git log --oneline'
 
 # setopt COMPLETE_ALIASES
 # setopt HIST_FIND_NO_DUPS
