@@ -3,6 +3,16 @@ theme = "native"
 [icons]
 icons = "awesome6"
 
+# [[block]]
+# block = "custom"
+# command = "python ~/.config/i3status-rust/scripts/pomodoro-slack.py"
+# interval = "once"
+
+[[block]]
+block = "custom"
+command = "python ~/.config/i3status-rust/scripts/next-prayer.py"
+interval = 60
+
 [[block]]
 block = "disk_space"
 path = "/"
@@ -11,9 +21,9 @@ interval = 20
 warning = 20.0
 alert = 10.0
 
-[[block]]
-block = "memory"
-interval = 1
+# [[block]]
+# block = "memory"
+# interval = 1
 # display_type = "memory"
 # format_mem = "{mem_used_percents}"
 # format_swap = "{swap_used_percents}"
@@ -39,8 +49,8 @@ cmd="pavucontrol"
 block = "battery"
 full_format = " $icon $percentage "
 format = "$percentage est {$time |}"
-missing_format = " $icon Battery missing"
-empty_format = "$percentage est {$time |} Charge ASAP" 
+missing_format = "Battery missing"
+empty_format = "$percentage est {$time |} CHARGE ASAP"
 empty_threshold = 10
 full_threshold = 80
 

@@ -12,7 +12,7 @@ CANDIDATES = $(wildcard tmux vim zsh newsboat)
 EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml
 DIRS   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
-all: node python macos
+all: python
 
 symlink:
 	@echo "→ Setup Environment Settings"
@@ -25,6 +25,8 @@ symlink:
 		stow --restow -vv --ignore ".DS_Store" --ignore ".+.local" --target="$(HOME)" --dir="$(DOTFILES)" files
     else ifeq "$(dir)" "nvim"
 		sh $(DOTFILES)/files/.config/nvim/.install/run.sh
+    else ifeq "$(dir)" "tmux"
+		sh $(DOTFILES)/files/.config/tmux/.install/run.sh
     else
 		@echo "→ Symlinking $(dir) dir"
 		sh $(DOTFILES)/$(dir)/setup.sh

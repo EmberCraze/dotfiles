@@ -229,7 +229,6 @@ print_header() {
     print_in_green "   | |__| | |__| | | |  | |     _| |_| |____| |____ ____) | \n"
     print_in_green "   |_____/ \____/  |_|  |_|    |_____|______|______|_____/  \n"
     print_in_green "                                                            \n"
-    print_in_green "                   by @AhmedAbdulrahman                     \n"
 }
 
 print_macos_header() {
@@ -240,7 +239,6 @@ print_macos_header() {
     print_in_green "  | |  | | | | (_| | (__| |__| |____) |  \n"
     print_in_green "  |_|  |_| |_|\__,_|\___|\____/|_____/   \n"
     print_in_green "                                         \n"
-    print_in_green "          by @AhmedAbdulrahman           \n"
 }
 
 print_node_header() {
@@ -251,7 +249,6 @@ print_node_header() {
     print_in_green "  | |\  | (_) | (_| |  __/ |__| |____) | "
     print_in_green "  |_| \_|\___/ \__,_|\___|\____/|_____/  "
     print_in_green "                                         "
-    print_in_green "          by @AhmedAbdulrahman           \n"
 }
 
 # Print repo Info

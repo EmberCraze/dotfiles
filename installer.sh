@@ -37,7 +37,7 @@ print_prompt() {
 
   PS3="Enter your choice (must be a number): "
 
-  MENU_OPTIONS=("All" "Install package manager" "Install Git" "Clone Ahmed's dotfiles" "Symlink files" "Change shell" "Quit")
+  MENU_OPTIONS=("All" "Install package manager" "Install Git" "Symlink files" "Change shell" "Quit")
 
   select opt in "${MENU_OPTIONS[@]}"; do
     case $opt in
@@ -53,10 +53,6 @@ print_prompt() {
       install_git
       break
       ;;
-#    "Clone Ahmed's dotfiles")
-#      clone_dotfiles
-#      break
-#      ;;
     "Symlink files")
       install_package_manager
       symlink_files
@@ -240,47 +236,6 @@ install_zsh() {
 
 	finish
 }
-
-#clone_dotfiles() {
-#  print_question "Trying to detect if are installed in $DOTFILES..."
-#
-#  if [ ! -d $DOTFILES ]; then
-#    print_info "Seems like you don't have any previous dotfiles!"
-#
-#    ask_for_confirmation "Do you agree to proceed with dotfiles installation?"
-#
-#    if ! answer_is_yes; then
-#      return
-#    fi
-#
-#
-#
-#    print_info "Cloning dotfiles"
-#
-#    # Install git if not present
-#    install_git
-#
-#    git clone --recursive "$GITHUB_REPO_URL_BASE.git" $DOTFILES
-#
-#    # Setup repo origin & mirrors
-#    cd "$DOTFILES" &&
-#      git remote set-url origin git@github.com:AhmedAbdulrahman/dotfiles.git
-#
-#  else
-#    print_info "You already have Ahmed's dotfiles installed. Skipping..."
-#    print_info "Pulling latest update..."
-#
-#    cd "$DOTFILES" &&
-#      git stash -u &&
-#      git checkout master &&
-#      git reset --hard origin/master &&
-#      git submodule update --init --recursive &&
-#      git checkout - &&
-#      git stash pop
-#  fi
-#
-#  finish
-#}
 
 symlink_files() {
   print_info "Trying to detect if you have already cloned the dotfiles..."
