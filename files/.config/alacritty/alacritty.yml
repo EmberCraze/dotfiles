@@ -1,3 +1,11 @@
+import:
+  # uncomment the flavour you want below:
+  # - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+   # - ~/.config/alacritty/themes/themes/catppuccin-frappe.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+   # - ~/.config/alacritty/themes/themes/catppuccin_frappe.yaml
+   - ~/.config/alacritty/themes/themes/breeze.yaml
 window:
   dimensions:
     columns: 100
@@ -6,7 +14,7 @@ window:
     x: 0
     y: 0
   dynamic_padding: false
-  opacity: 0.85
+  # opacity: 0.85
   decorations: full
 scrolling:
   history: 10000
@@ -17,6 +25,7 @@ font:
   normal:
     family: Mononoki Nerd Font
     # family: JetbrainsMono Nerd Font
+
     style: Regular
   bold:
     family: Mononoki Nerd Font
@@ -24,7 +33,7 @@ font:
     style: Bold
   italic:
     family: Mononoki Nerd Font
-    # family: JetbrainsMono Nerd Font
+    # family: JetBrainsMono NFM
     style: Italic
   bold_italic:
     family: Mononoki Nerd Font
@@ -37,10 +46,10 @@ font:
   glyph_offset:
     x: 0
     y: 0
-colors:
-  primary:
-    background: '#000000'
-    foreground: '#0096FF'
+# colors:
+#   primary:
+#     background: '#000000'
+#     foreground: '#0096FF'
 
     # Bright and dim foreground colors
     #
