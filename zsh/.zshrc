@@ -25,6 +25,9 @@ fi
 # alias x='ranger'
 # alias h='htop'
 alias glo='git log --oneline'
+alias ls='lsd'
+alias cat='bat'
+alias vim='nvim'
 
 # setopt COMPLETE_ALIASES
 # setopt HIST_FIND_NO_DUPS
