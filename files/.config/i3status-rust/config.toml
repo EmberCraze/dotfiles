@@ -7,6 +7,21 @@ icons = "awesome6"
 # block = "custom"
 # command = "python ~/.config/i3status-rust/scripts/pomodoro-slack.py"
 # interval = "once"
+[[block]]
+block = "pomodoro"
+notify_cmd = "notify-send '{msg}'"
+blocking_cmd = false
+[block.icons_overrides]
+pomodoro = "POMO"
+pomodoro_started = "STARTED"
+pomodoro_stopped = "STOPPED"
+pomodoro_paused = "PAUSED"
+pomodoro_break = "BREAK"
+
+[[block]]
+block = "custom"
+command = "xkb-switch"
+interval = 1
 
 [[block]]
 block = "custom"
