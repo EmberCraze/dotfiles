@@ -13,3 +13,4 @@
 log.*.txt
 node_modules
 files/.config/tmux/plugins*
+*__pycache__*
