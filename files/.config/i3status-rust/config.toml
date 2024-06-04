@@ -3,21 +3,6 @@ theme = "native"
 [icons]
 icons = "awesome6"
 
-# [[block]]
-# block = "custom"
-# command = "python ~/.config/i3status-rust/scripts/pomodoro-slack.py"
-# interval = "once"
-[[block]]
-block = "pomodoro"
-notify_cmd = "notify-send '{msg}'"
-blocking_cmd = false
-[block.icons_overrides]
-pomodoro = "POMO"
-pomodoro_started = "STARTED"
-pomodoro_stopped = "STOPPED"
-pomodoro_paused = "PAUSED"
-pomodoro_break = "BREAK"
-
 [[block]]
 block = "custom"
 command = "xkb-switch"
@@ -25,7 +10,7 @@ interval = 1
 
 [[block]]
 block = "custom"
-command = "python ~/.config/i3status-rust/scripts/next-prayer.py"
+cycle = ["python ~/.config/i3status-rust/scripts/next-prayer.py strangnas sweden",  "python ~/.config/i3status-rust/scripts/next-prayer.py stockholm sweden"]
 interval = 60
 
 [[block]]
@@ -36,17 +21,18 @@ interval = 20
 warning = 20.0
 alert = 10.0
 
-# [[block]]
-# block = "memory"
-# interval = 1
-# display_type = "memory"
-# format_mem = "{mem_used_percents}"
-# format_swap = "{swap_used_percents}"
+[[block]]
+block = "memory"
+format = " $icon $mem_used_percents.eng(w:1) "
+# format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:Mi)/$swap_total.eng(w:3,u:B,p:Mi)($swap_used_percents.eng(w:2)) "
+interval = 30
+warning_mem = 70
+critical_mem = 90
 
 [[block]]
 block = "cpu"
 interval = 1
-format = "{$barchart} {$utilization |} {$frequency}"
+format = "$barchart $utilization.eng(w:3) $frequency.eng(w:4)"
 
 [[block]]
 block = "sound"
