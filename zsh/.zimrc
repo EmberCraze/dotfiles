@@ -5,3 +5,4 @@ zmodule zsh-users/zsh-autosuggestions
 zmodule romkatv/powerlevel10k --use degit
 zmodule MichaelAquilina/zsh-auto-notify
 zmodule unixorn/fzf-zsh-plugin
+zmodule Aloxaf/fzf-tab

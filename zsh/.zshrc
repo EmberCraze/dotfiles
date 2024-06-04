@@ -15,7 +15,6 @@ fi
 # alias mirrorUpdate='reflector --country us --latest 15 --protocol https --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 # alias pacmanGhost='~/.scripts/pacman.sh'
 # alias shivita='toilet -f mono12 -F rainbow 'andrea' | ponythink -f winona'
-# alias ls='lsd'
 # alias l='ls -l'
 # alias la='ls -a'
 # alias lla='ls -la'
@@ -23,75 +22,53 @@ fi
 # alias ip='ip -c'
 # alias rm='rm -i'
 # alias x='ranger'
-# alias h='htop'
+alias b='btm -b'
 alias glo='git log --oneline'
 alias ls='lsd'
 alias cat='bat'
 alias vim='nvim'
 
+# History stuff
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
 # setopt COMPLETE_ALIASES
-# setopt HIST_FIND_NO_DUPS
-# setopt HIST_IGNORE_ALL_DUPS
-# setopt HIST_IGNORE_SPACE
 # setopt appendhistory
 # setopt autocd
 # setopt extendedglob
 # setopt incappendhistory
 # setopt nomatch
 # setopt notify
-# setopt sharehistory
 
-# unsetopt beep
-# bindkey -e
-# autoload -Uz compinit promptinit bashcompinit
-# compinit
-# promptinit
-# bashcompinit
-# zstyle :compinstall filename '$HOME/.zshrc'
-# complete -o nospace -C /usr/bin/vault vault
-# complete -o nospace -C /usr/bin/terraform terraform
+unsetopt beep
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+# Env variables
+eval "$(zoxide init --cmd cd zsh)"
+# eval "$(fzf --zsh)"
 
-# plugins=(
-#     colorize
-#     copyfile
-#     docker
-#     docker-compose
-# 	zsh-autosuggestions
-# 	zsh-syntax-highlighting
-#     fast-syntax-highlighting
-#     zsh-autocomplete
-#     git
-#     gitfast
-#     golang
-#     history-substring-search
-#     kubectl
-#     rust
-#     safe-paste
-#     tmux
-#     virtualenv
-# )
-
-# Source Oh My ZSH for plugins and zsh-autosuggestions, zsh-syntax-highlighting,
-# zsh-history-substring-search and the powerlevel10k theme.
-# while IFS= read -r script
-# do
-#     source "$script"
-# done < <(find /usr/share/zsh/plugins/ -maxdepth 2 -type f -name "*.zsh" ! -name '*plugin.zsh')
-# source $ZSH/oh-my-zsh.sh
-# source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':completion:*' menu no
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+export FZF_PREVIEW_ADVANCED
 
 zstyle ':zim:zmodule' use 'degit'
+
 
 ZIM_HOME=~/.zim
 
