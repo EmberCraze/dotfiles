@@ -14,14 +14,14 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 from random import choice
 
+CITY = sys.argv[1] if len(sys.argv) > 1 else "stockholm"
+COUNTRY = sys.argv[2] if len(sys.argv) > 2 else "sweden"
 TODAY_DATE = time.strftime("%d-%m-%Y", datetime.now().timetuple())
-CACHE = os.path.join(gettempdir(), f".{TODAY_DATE}.json")
-RED = "#[fg=#ffa7c4]" if os.environ.get("TMUX") else "\033[1;31;40m"
+CACHE = os.path.join(gettempdir(), f".{CITY}-{COUNTRY}-{TODAY_DATE}.json")
+RED = ""  # "#[fg=#ffa7c4]" if os.environ.get("TMUX") else "\033[1;31;40m"
 PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
 
 # https://aladhan.com/prayer-times-api#GetCalendarByCitys
-CITY = sys.argv[1] if len(sys.argv) > 1 else "Stockholm"
-COUNTRY = sys.argv[2] if len(sys.argv) > 2 else "Sweden"
 METHOD = sys.argv[4] if len(sys.argv) > 4 else 3
 AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
@@ -34,7 +34,7 @@ AGENTS = [
 
 
 def get_api():
-    url = f"https://api.aladhan.com/v1/timingsByCity?city={CITY}&country={COUNTRY}&method={METHOD}&tune=0,-23,-5,7,7,7,0,-25,0"
+    url = f"https://api.aladhan.com/v1/timingsByCity?city={CITY}&country={COUNTRY}"
 
     try:
         req = Request(url, data=None, headers={"User-Agent": choice(AGENTS)})
@@ -90,7 +90,7 @@ def get_prayer(now):
                 time_remaning = int(prayer_time_timestamp - now_timestamp) / 60
                 color = "" if time_remaning > 30 else RED
 
-                result = f"{color}{prayer}: {timings[prayer]}"
+                result = f"{color}{CITY[:3].upper()} {prayer}: {timings[prayer]}"
 
                 break
 
