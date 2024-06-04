@@ -12,3 +12,4 @@
 *.old
 log.*.txt
 node_modules
+files/.config/tmux/plugins*
