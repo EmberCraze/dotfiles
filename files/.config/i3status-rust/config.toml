@@ -30,6 +30,13 @@ warning_mem = 70
 critical_mem = 90
 
 [[block]]
+block = "temperature"
+format = " $icon $max max "
+format_alt = " $icon $min min, $max max, $average avg "
+interval = 1
+chip = "*-isa-*"
+
+[[block]]
 block = "cpu"
 interval = 1
 format = "$barchart $utilization.eng(w:3) $frequency.eng(w:4)"
