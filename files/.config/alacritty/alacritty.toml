@@ -1,4 +1,4 @@
-import = ["/home/embercraze/.config/alacritty/themes/themes/breeze.toml"]
+import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/everforest_light.toml"]
 
 [font]
 size = 10.0
