@@ -10,7 +10,7 @@ BOLD=$(tput bold)
 
 declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 declare -r CONFIG_DIR="${CONFIG_DIR:-"$XDG_CONFIG_HOME/tmux"}"
-declare -r DOTFILES_DIR="$HOME/develop/MegaGithubSync/dotfiles/files/.config"
+declare -r DOTFILES_DIR="$HOME/develop/dotfiles/files/.config"
 
 # MAIN
 function main() {

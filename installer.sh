@@ -4,7 +4,7 @@ declare -r GITHUB_REPOSITORY="EmberCraze/dotfiles"
 declare -r GITHUB_REPO_URL_BASE="https://github.com/$GITHUB_REPOSITORY"
 declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/master/scripts/utils.sh"
 
-declare -r DOTFILES="$HOME/develop/MegaGithubSync/dotfiles"
+declare -r DOTFILES="$HOME/develop/dotfiles"
 
 download() {
     local url="$1"

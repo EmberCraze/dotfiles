@@ -1,8 +1,8 @@
 # use zsh
-SHELL:=/bin/zsh
+SHELL:=zsh
 
 # This can be overriden by doing `make DOTFILES=some/path <task>`
-DOTFILES="$(HOME)/develop/MegaGithubSync/dotfiles"
+DOTFILES="$(HOME)/develop/dotfiles"
 SCRIPTS="$(DOTFILES)/scripts"
 INSTALL="$(DOTFILES)/installer.sh"
 dir=not_override
