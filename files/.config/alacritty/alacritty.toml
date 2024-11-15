@@ -1,4 +1,3 @@
-import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/everforest_light.toml"]
 
 [font]
 size = 10.0
@@ -42,3 +41,6 @@ lines = 200
 [window.padding]
 x = 0
 y = 0
+
+[general]
+import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/gruvbox_material.toml"]
