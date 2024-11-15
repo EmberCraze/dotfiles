@@ -36,3 +36,5 @@
 !.rgrc
 !.taskrc
 !timewarrior.cfg
+!redshift
+!redshift.conf
