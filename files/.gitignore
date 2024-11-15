@@ -38,3 +38,7 @@
 !timewarrior.cfg
 !redshift
 !redshift.conf
+!dunst
+!dunstrc
+!home-manager
+!home.nix
