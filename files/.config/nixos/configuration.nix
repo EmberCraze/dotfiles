@@ -40,10 +40,10 @@
   # Configure keymap in X11
   services.xserver = {
     enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
+	xkb = {
+		layout = "se,us,iq";
+		options = "grp:alt_shift_toggle";
+	}
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
