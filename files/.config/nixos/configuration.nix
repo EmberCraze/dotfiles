@@ -6,6 +6,12 @@
 
 {
 
+  nixpkgs.overlays = [
+    (self: super: {
+      windsurf = self.callPackage ./windsurf.nix {};
+    })
+  ];
+
   # networking.hostName = "nixos"; # Define your hostname.
 
   networking.nameservers = [ "45.90.28.223" "45.90.30.223" ];
@@ -137,6 +143,10 @@
       nodePackages_latest.bash-language-server
       bitwarden-cli
       xautolock
+	  windsurf
+	  openssl
+	  signal-desktop
+	  ltex-ls-plus
     ];
   };
 
