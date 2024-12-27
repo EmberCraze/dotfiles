@@ -5,7 +5,7 @@ icons = "awesome6"
 
 [[block]]
 block = "custom"
-command = "xkb-switch"
+command = "xkb-switch -p | tr '[:lower:]' '[:upper:]'"
 interval = 1
 
 [[block]]

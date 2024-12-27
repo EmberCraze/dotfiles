@@ -149,6 +149,7 @@
 	  ltex-ls-plus
 	  vscode
 	  gnome-keyring
+	  xkb-switch
     ];
   };
 
