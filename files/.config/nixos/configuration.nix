@@ -15,6 +15,7 @@
   # networking.hostName = "nixos"; # Define your hostname.
 
   networking.nameservers = [ "45.90.28.223" "45.90.30.223" ];
+  networking.networkmanager.dns = "none";
 
   # Enable networking
   networking.networkmanager.enable = true;
