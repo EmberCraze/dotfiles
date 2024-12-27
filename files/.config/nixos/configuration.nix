@@ -51,6 +51,7 @@
         i3status
         i3lock
         i3blocks
+		i3status-rust
       ];
     };
   };
@@ -84,7 +85,6 @@
   users.users.embercraze = {
     useDefaultShell = true;
     isNormalUser = true;
-    description = "embercraze";
     extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       neovim
@@ -93,7 +93,6 @@
       git
       gnumake
       stow
-      i3status-rust
       pavucontrol
       rofi
       keychain
@@ -147,6 +146,8 @@
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
+	  vscode
+	  gnome-keyring
     ];
   };
 
