@@ -150,6 +150,7 @@
 	  vscode
 	  gnome-keyring
 	  xkb-switch
+	  gh # github cli
     ];
   };
 
