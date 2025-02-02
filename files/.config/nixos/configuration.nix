@@ -12,13 +12,15 @@
     })
   ];
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking = {
+	  # Enable networking
+	networkmanager = {
+		enable = true;
+		dns = "none";
+	 };
+	nameservers = [ "45.90.28.223" "45.90.30.223" ];
+  };
 
-  networking.nameservers = [ "45.90.28.223" "45.90.30.223" ];
-  networking.networkmanager.dns = "none";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
@@ -138,7 +140,7 @@
       feh
       redshift # eye strain filter
       jetbrains.pycharm-professional
-      nemo-with-extensions
+      nemo-with-extensions # file browser
       lua-language-server
       nodePackages_latest.bash-language-server
       bitwarden-cli
@@ -151,6 +153,7 @@
 	  gnome-keyring
 	  xkb-switch
 	  gh # github cli
+	  supabase-cli
     ];
   };
 
@@ -182,16 +185,18 @@
   };
 
   # Hardware stuff
-  hardware.pulseaudio.enable = true;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.settings = {
-    General = {
-      Experimental = true;
-    };
+  hardware = {
+	pulseaudio.enable = true;
+	acpilight.enable = true;
+	bluetooth = {
+		enable = true;
+		settings = {
+			General = {
+			  Experimental = true;
+			};
+		};
+	};
   };
-  hardware.acpilight.enable = true;
-
-
 
   # Enable docker
   virtualisation.docker.enable = true;
