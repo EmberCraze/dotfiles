@@ -154,6 +154,8 @@
 	  xkb-switch
 	  gh # github cli
 	  supabase-cli
+	  todoist
+	  aider-chat
     ];
   };
 
