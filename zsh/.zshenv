@@ -26,3 +26,4 @@ export PATH=$HOME/.local/bin:$PATH
 
 export PATH="$HOME/.local/bin:$PATH"
 export npm_config_prefix="$HOME/.local"
+setopt no_global_rcs
