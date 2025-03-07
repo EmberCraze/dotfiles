@@ -178,7 +178,17 @@
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [];
-  programs.firefox.enable = true;
+  programs.firefox = {
+	enable = true;
+	package = pkgs.librewolf;
+	policies = {
+	   DisableTelemetry = true;
+	   DisableFirefoxStudies = true;
+	   Preferences = {
+	      "apz.autoscroll.enabled" = true;
+	   };
+	};
+  };
 
   programs.appimage = {
     enable = true;
