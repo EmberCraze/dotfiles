@@ -144,13 +144,11 @@
       nemo-with-extensions # file browser
       lua-language-server
       nodePackages_latest.bash-language-server
-      bitwarden-cli
       xautolock
 	  windsurf
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
-	  vscode
 	  gnome-keyring
 	  xkb-switch
 	  gh # github cli
