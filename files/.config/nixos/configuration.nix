@@ -82,6 +82,7 @@
       tmuxPlugins.catppuccin
     ];
   };
+  services.pulseaudio.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -188,7 +189,6 @@
 
   # Hardware stuff
   hardware = {
-	pulseaudio.enable = true;
 	acpilight.enable = true;
 	bluetooth = {
 		enable = true;
