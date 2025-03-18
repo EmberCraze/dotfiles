@@ -155,6 +155,7 @@
 	  supabase-cli
 	  todoist
 	  aider-chat
+	  blanket
     ];
   };
 
