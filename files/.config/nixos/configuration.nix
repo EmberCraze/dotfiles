@@ -157,6 +157,7 @@
 	  todoist
 	  aider-chat
 	  blanket
+	  vscode # desktop computer
 	  piper # Logic mouse programmer
     ];
   };
