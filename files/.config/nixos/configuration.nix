@@ -73,6 +73,7 @@
 
   services.autorandr.enable = true;
   services.acpid.enable = true;
+  services.ratbagd.enable = true; # logitecs mouse driver
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [
@@ -156,6 +157,7 @@
 	  todoist
 	  aider-chat
 	  blanket
+	  piper # Logic mouse programmer
     ];
   };
 
