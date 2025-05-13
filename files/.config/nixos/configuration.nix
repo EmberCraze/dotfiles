@@ -161,6 +161,8 @@
 	  ventoy-full-gtk
 	  usbimager
 	  piper # Logic mouse programmer
+	  kdePackages.filelight
+	  super-productivity
     ];
   };
 
