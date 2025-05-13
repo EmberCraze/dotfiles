@@ -43,4 +43,6 @@ x = 0
 y = 0
 
 [general]
-import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/gruvbox_material.toml"]
+# import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/gruvbox_material.toml"]
+# import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"]
+import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/one_light.toml"]
