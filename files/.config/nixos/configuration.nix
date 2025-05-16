@@ -158,7 +158,6 @@
 	  aider-chat
 	  blanket
 	  vscode # desktop computer
-	  ventoy-full-gtk
 	  usbimager
 	  piper # Logic mouse programmer
 	  kdePackages.filelight
