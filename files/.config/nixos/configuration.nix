@@ -87,7 +87,6 @@
       neovim
       networkmanagerapplet
       alacritty
-      git
       gnumake
       stow
       pavucontrol
@@ -184,6 +183,15 @@
       tmuxPlugins.yank
       tmuxPlugins.catppuccin
     ];
+  };
+  programs.git = {
+    enable = true;
+	config = {
+		user = {
+			name = "embercraze";
+			email = "maher.shaker@live.se";
+		};
+	};
   };
 
   fonts.packages = with pkgs; [
