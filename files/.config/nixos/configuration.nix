@@ -154,6 +154,7 @@
 	  piper # Logic mouse programmer
 	  kdePackages.filelight
 	  super-productivity
+	  gimp
     ];
   };
 
