@@ -74,16 +74,8 @@
   services.autorandr.enable = true;
   services.acpid.enable = true;
   services.ratbagd.enable = true; # logitecs mouse driver
-  programs.tmux = {
-    enable = true;
-    plugins = with pkgs; [
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.sensible
-      tmuxPlugins.yank
-      tmuxPlugins.catppuccin
-    ];
-  };
   services.pulseaudio.enable = true;
+
 
   users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -165,6 +157,34 @@
     ];
   };
 
+  programs.zsh.enable = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [];
+  programs.firefox = {
+	enable = true;
+	package = pkgs.librewolf;
+	policies = {
+	   DisableTelemetry = true;
+	   DisableFirefoxStudies = true;
+	   Preferences = {
+	      "apz.autoscroll.enabled" = true;
+	   };
+	};
+  };
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs; [
+      tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.sensible
+      tmuxPlugins.yank
+      tmuxPlugins.catppuccin
+    ];
+  };
+
   fonts.packages = with pkgs; [
     font-awesome
     nerd-fonts.mononoki
@@ -182,25 +202,6 @@
   ];
   environment.shells = with pkgs; [ zsh ];
 
-  programs.zsh.enable = true;
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = [];
-  programs.firefox = {
-	enable = true;
-	package = pkgs.librewolf;
-	policies = {
-	   DisableTelemetry = true;
-	   DisableFirefoxStudies = true;
-	   Preferences = {
-	      "apz.autoscroll.enabled" = true;
-	   };
-	};
-  };
-
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
 
   # Hardware stuff
   hardware = {
