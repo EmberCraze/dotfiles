@@ -50,6 +50,7 @@
         i3status
         i3blocks
 		i3status-rust
+		scrot # for screenshot on lock
       ];
     };
   };
