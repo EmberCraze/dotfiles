@@ -48,12 +48,12 @@
       extraPackages = with pkgs; [
         dmenu
         i3status
-        i3lock
         i3blocks
 		i3status-rust
       ];
     };
   };
+  programs.i3lock.enable = true;
 
   services.displayManager = {
     enable = true;
