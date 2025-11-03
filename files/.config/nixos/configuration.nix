@@ -133,7 +133,6 @@
       nemo-with-extensions # file browser
       lua-language-server
       nodePackages_latest.bash-language-server
-      xautolock
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
