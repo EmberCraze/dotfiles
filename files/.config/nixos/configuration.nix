@@ -196,7 +196,6 @@
   fonts.packages = with pkgs; [
     font-awesome
     nerd-fonts.mononoki
-    # (nerdfonts.override { fonts = [ "Mononoki" ]; })
   ];
 
   # Allow unfree packages
