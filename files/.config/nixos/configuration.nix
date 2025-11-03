@@ -71,6 +71,7 @@
   services.acpid.enable = true;
   services.ratbagd.enable = true; # logitecs mouse driver
   services.pulseaudio.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
 
   users.defaultUserShell = pkgs.zsh;
@@ -136,7 +137,6 @@
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
-	  gnome-keyring
 	  xkb-switch
 	  gh # github cli
 	  supabase-cli
