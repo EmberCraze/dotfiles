@@ -6,12 +6,6 @@
 
 {
 
-  nixpkgs.overlays = [
-    (self: super: {
-      windsurf = self.callPackage ./windsurf.nix {};
-    })
-  ];
-
   networking = {
 	  # Enable networking
 	networkmanager = {
@@ -137,7 +131,6 @@
       lua-language-server
       nodePackages_latest.bash-language-server
       xautolock
-	  windsurf
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
