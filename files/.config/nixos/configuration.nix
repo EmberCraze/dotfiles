@@ -10,10 +10,12 @@
 	  # Enable networking
 	networkmanager = {
 		enable = true;
-		dns = "none";
+		# dns = "none";
 	 };
+	firewall.checkReversePath = false; # for wireguard
 	nameservers = [ "45.90.28.223" "45.90.30.223" ];
   };
+  services.resolved.enable = true; # for wireguard
 
 
   # Set your time zone.
