@@ -140,6 +140,7 @@
 	  supabase-cli
 	  todoist
 	  aider-chat
+	  terraform
 	  blanket
 	  vscode # desktop computer
 	  usbimager
@@ -147,6 +148,11 @@
 	  kdePackages.filelight
 	  super-productivity
 	  gimp
+	  claude-code
+	  gemini-cli
+      jujutsu
+	  opencode
+	  audacity
     ];
   };
 
