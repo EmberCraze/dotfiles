@@ -103,15 +103,12 @@
       gcc
       pyright
       python312
-      tabnine
-      codeium
       arandr
       ripgrep
       brave
       brightnessctl
       libnotify
       dunst
-      black
       pyright
       killall
       xorg.xkill
@@ -139,9 +136,6 @@
 	  ltex-ls-plus
 	  xkb-switch
 	  gh # github cli
-	  supabase-cli
-	  todoist
-	  aider-chat
 	  terraform
 	  blanket
 	  vscode # desktop computer
@@ -155,6 +149,8 @@
       jujutsu
 	  opencode
 	  audacity
+      foliate
+	  jq
     ];
   };
 
