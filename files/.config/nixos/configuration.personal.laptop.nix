@@ -231,7 +231,7 @@ nixpkgs.config.permittedInsecurePackages = [
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-	fuzzel swaylock mako swayidle # niri
+	fuzzel swaylock mako swayidle i3bar-river # niri
   ];
   environment.shells = with pkgs; [ zsh ];
 
