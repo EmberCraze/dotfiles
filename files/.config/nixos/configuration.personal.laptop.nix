@@ -119,7 +119,7 @@
       dunst
       pyright
       killall
-      xorg.xkill
+      xkill
       playerctl
       peek
       nodePackages.pnpm
