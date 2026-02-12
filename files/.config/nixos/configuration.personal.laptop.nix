@@ -212,6 +212,9 @@ nixpkgs.config.permittedInsecurePackages = [
 	};
   };
   programs.openvpn3.enable = true;
+  programs.niri.enable = true;
+  security.pam.services.swaylock = {};
+  programs.waybar.enable = true; # top bar
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -228,6 +231,7 @@ nixpkgs.config.permittedInsecurePackages = [
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+	fuzzel swaylock mako swayidle # niri
   ];
   environment.shells = with pkgs; [ zsh ];
 
