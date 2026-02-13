@@ -151,6 +151,10 @@
 	  audacity
       foliate
 	  jq
+	  obsidian
+	  ansible
+	  ffmpeg
+	  tail-tray
 	  vscode-json-languageserver # json lsp
     ];
   };
