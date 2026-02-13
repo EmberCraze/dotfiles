@@ -151,6 +151,7 @@
 	  audacity
       foliate
 	  jq
+	  vscode-json-languageserver # json lsp
     ];
   };
 
