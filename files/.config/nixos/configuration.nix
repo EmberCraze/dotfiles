@@ -195,6 +195,7 @@
 		};
 	};
   };
+  programs.niri.enable = true;
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -209,6 +210,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    fuzzel swaylock mako swayidle i3bar-river # niri
   ];
   environment.shells = with pkgs; [ zsh ];
 
