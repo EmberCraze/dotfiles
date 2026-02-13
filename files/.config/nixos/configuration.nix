@@ -127,7 +127,7 @@
       stylua # lua code formatter
       feh
       redshift # eye strain filter
-      jetbrains.pycharm-professional
+      jetbrains.pycharm
       nemo-with-extensions # file browser
       lua-language-server
       nodePackages_latest.bash-language-server
