@@ -163,7 +163,7 @@
 	  scrcpy
 	  telegram-desktop
 	  lutris
-	  wineWowPackages.full
+	  wineWow64Packages.full
 	  winetricks
 	  vulkan-tools
 	  jq
