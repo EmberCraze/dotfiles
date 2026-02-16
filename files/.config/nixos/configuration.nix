@@ -157,6 +157,7 @@
 	  ffmpeg
 	  tail-tray
 	  vscode-json-languageserver # json lsp
+	  zed-editor
     ];
   };
 
