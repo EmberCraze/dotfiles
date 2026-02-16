@@ -73,6 +73,7 @@
   services.ratbagd.enable = true; # logitecs mouse driver
   services.pulseaudio.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  services.tailscale.enable = true;
 
 
   users.defaultUserShell = pkgs.zsh;
