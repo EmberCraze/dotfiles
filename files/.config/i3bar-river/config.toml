@@ -41,8 +41,8 @@ layer = "top" # one of "top", "overlay", "bottom" or "background"
 # start_hidden = false # whether the bar is initially in the 'hidden' state
 
 # WM-specific options
-[wm.river]
-max_tag = 9 # Show only the first nine tags
+# [wm.river]
+# max_tag = 9 # Show only the first nine tags
 
 # Per output overrides
 # [output.your-output-name]
