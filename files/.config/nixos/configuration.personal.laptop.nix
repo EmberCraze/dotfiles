@@ -58,7 +58,7 @@
 
   services.displayManager = {
     enable = true;
-    defaultSession = "none+i3";
+    defaultSession = "niri";
   };
 
   # Disable pipewire
@@ -214,7 +214,6 @@ nixpkgs.config.permittedInsecurePackages = [
   programs.openvpn3.enable = true;
   programs.niri.enable = true;
   security.pam.services.swaylock = {};
-  programs.waybar.enable = true; # top bar
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -232,6 +231,7 @@ nixpkgs.config.permittedInsecurePackages = [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
 	fuzzel swaylock mako swayidle i3bar-river # niri
+	xwayland-satellite # xwayland support
   ];
   environment.shells = with pkgs; [ zsh ];
 
