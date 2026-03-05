@@ -116,7 +116,6 @@
       playerctl
       peek
       nodePackages.pnpm
-      nodePackages.nodejs
       mpv
       nomacs
       nodePackages_latest.typescript-language-server # ts lsp
@@ -214,6 +213,7 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     fuzzel swaylock mako swayidle i3bar-river # niri
+	nodejs
   ];
   environment.shells = with pkgs; [ zsh ];
 
