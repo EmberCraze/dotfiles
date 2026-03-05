@@ -75,6 +75,20 @@
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
 
+  xdg.mime.defaultApplications = {
+     "text/html" = "librewolf.desktop";
+     "x-scheme-handler/http" = "librewolf.desktop";
+     "x-scheme-handler/https" = "librewolf.desktop";
+     "x-scheme-handler/about" = "librewolf.desktop";
+     "x-scheme-handler/unknown" = "librewolf.desktop";
+  };
+
+xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  config.common.default = "*";
+};
+
 
   users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -157,7 +171,9 @@
 	  tail-tray
 	  vscode-json-languageserver # json lsp
 	  zed-editor
-	  wdisplays
+	  wdisplays # wayland
+	  wl-clipboard # wayland
+	  grim # screenshot flameshot
     ];
   };
 
@@ -212,10 +228,17 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-    fuzzel swaylock mako swayidle i3bar-river # niri
+    fuzzel swaylock mako swayidle i3bar-river waybar # niri
 	nodejs
   ];
+
   environment.shells = with pkgs; [ zsh ];
+  environment.sessionVariables = {
+    MOZ_DBUS_REMOTE = "1";
+	  BROWSER = "firefox"; # or whatever browser you use
+XDG_CURRENT_DESKTOP = "niri";
+  XDG_SESSION_TYPE = "wayland";
+  };
 
 
   # Hardware stuff
