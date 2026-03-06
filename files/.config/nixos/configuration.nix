@@ -173,6 +173,7 @@ xdg.portal = {
 	  wdisplays # wayland
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
+	  nautilus
     ];
   };
 
@@ -232,9 +233,10 @@ xdg.portal = {
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
     MOZ_DBUS_REMOTE = "1";
-	  BROWSER = "firefox"; # or whatever browser you use
-XDG_CURRENT_DESKTOP = "niri";
-  XDG_SESSION_TYPE = "wayland";
+    BROWSER = "firefox"; # or whatever browser you use
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
+    NIXOS_OZONE_WL = "1";
   };
 
 
