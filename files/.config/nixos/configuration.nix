@@ -174,6 +174,7 @@ xdg.portal = {
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
 	  nautilus
+	  logseq
     ];
   };
 
@@ -226,7 +227,7 @@ xdg.portal = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    fuzzel swaylock mako swayidle i3bar-river waybar # niri
+    fuzzel swaylock mako swayidle i3bar-river waybar pipewire xdg-desktop-portal-wlr # niri
 	nodejs
   ];
 
