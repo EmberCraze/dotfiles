@@ -168,6 +168,7 @@
 	  vulkan-tools
 	  jq
 	  steam
+	  wdisplays
     ];
   };
 
