@@ -122,12 +122,12 @@
       xkill
       playerctl
       peek
-      nodePackages.pnpm
-      nodePackages.nodejs
+      pnpm
+      nodejs
       mpv
       nomacs
-      nodePackages_latest.typescript-language-server # ts lsp
-      nodePackages_latest.prettier # js formatter
+      typescript-language-server # ts lsp
+      prettier # js formatter
       code-cursor
       gparted
       ruff # python code formatter and linter
@@ -137,7 +137,7 @@
       redshift # eye strain filter
       nemo-with-extensions # file browser
       lua-language-server
-      nodePackages_latest.bash-language-server
+      bash-language-server
 	  openssl
 	  signal-desktop
 	  ltex-ls-plus
