@@ -179,6 +179,7 @@ xdg.portal = {
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
 	  logseq
+	  sox
     ];
   };
 
