@@ -79,6 +79,7 @@
   services.pulseaudio.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
+  services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
 
   xdg.mime.defaultApplications = {
      "text/html" = "librewolf.desktop";
@@ -157,7 +158,6 @@ xdg.portal = {
 	  gh # github cli
 	  terraform
 	  blanket
-	  vscode # desktop computer
 	  usbimager
 	  piper # Logic mouse programmer
 	  kdePackages.filelight
@@ -178,7 +178,6 @@ xdg.portal = {
 	  wdisplays # wayland
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
-	  nautilus
 	  logseq
     ];
   };
