@@ -57,8 +57,13 @@
   programs.i3lock.enable = true;
 
   services.displayManager = {
-    enable = true;
-    defaultSession = "none+i3";
+    # enable = true;
+	sddm = {
+		enable = true;
+		wayland.enable = true;
+	};
+    # defaultSession = "none+i3";
+	defaultSession = "niri";
   };
 
   # Disable pipewire
