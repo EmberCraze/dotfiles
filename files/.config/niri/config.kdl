@@ -629,4 +629,7 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    // Reset display to laptop screen only.
+    Mod+Shift+F1 { spawn-sh "~/.config/niri/scripts/reset-display"; }
 }

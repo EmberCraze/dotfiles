@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Reset display to laptop screen only (niri/Wayland)
+
+LAPTOP="eDP-1"
+
+# Get all connected outputs
+outputs=$(niri msg --json outputs | jq -r 'keys[]')
+
+# Turn off all external outputs
+for output in $outputs; do
+    if [[ "$output" != "$LAPTOP" ]]; then
+        echo "Turning off $output"
+        niri msg output "$output" off
+    fi
+done
+
+# Ensure laptop display is on with preferred mode
+echo "Enabling $LAPTOP"
+niri msg output "$LAPTOP" on
+niri msg output "$LAPTOP" mode 1920x1200@60.026
+niri msg output "$LAPTOP" scale 1.25
+
+echo "Display reset to laptop screen."
