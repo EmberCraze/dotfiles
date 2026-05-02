@@ -110,7 +110,7 @@
       xclip
       gcc
       pyright
-      python312
+      python313
       arandr
       ripgrep
       brave
