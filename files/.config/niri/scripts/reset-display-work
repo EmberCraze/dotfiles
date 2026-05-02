@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Reset display to work setup: external Philips monitor only (niri/Wayland)
+
+MONITOR="HDMI-A-1"
+
+# Get all connected outputs
+outputs=$(niri msg --json outputs | jq -r 'keys[]')
+
+# Turn off every output except the work monitor
+for output in $outputs; do
+    if [[ "$output" != "$MONITOR" ]]; then
+        echo "Turning off $output"
+        niri msg output "$output" off
+    fi
+done
+
+echo "Enabling $MONITOR"
+niri msg output "$MONITOR" on
+niri msg output "$MONITOR" mode 3440x1440@59.973
+niri msg output "$MONITOR" scale 1
+niri msg output "$MONITOR" position --x 0 --y 0
+niri msg output "$MONITOR" transform normal
+
+echo "Display reset to work monitor."

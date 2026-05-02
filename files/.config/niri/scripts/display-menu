@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Show a fuzzel menu to pick a display preset.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+choice=$(printf '%s\n' \
+    "Laptop only" \
+    "Work monitor only" \
+    "Home monitor only" \
+    | fuzzel --dmenu --prompt "Display: ")
+
+case "$choice" in
+    "Laptop only")        exec "$SCRIPT_DIR/reset-display" ;;
+    "Work monitor only")  exec "$SCRIPT_DIR/reset-display-work" ;;
+    "Home monitor only")  exec "$SCRIPT_DIR/reset-display-home" ;;
+esac

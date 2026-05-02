@@ -632,4 +632,7 @@ binds {
 
     // Reset display to laptop screen only.
     Mod+Shift+F1 { spawn-sh "~/.config/niri/scripts/reset-display"; }
+
+    // Show display preset picker.
+    Mod+Shift+F2 { spawn-sh "~/.config/niri/scripts/display-menu"; }
 }

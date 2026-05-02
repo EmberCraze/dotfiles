@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Reset display to home setup: external Philips monitor only (niri/Wayland)
+
+set -euo pipefail
+
+# Match by EDID (make/model/serial) so this survives connector renames (DP-5 → DP-6 etc).
+TARGET_MAKE="Philips Consumer Electronics Company"
+TARGET_MODEL="PHL 272B4Q"
+TARGET_SERIAL="AU11624000247"
+
+outputs_json=$(niri msg --json outputs)
+
+monitor=$(jq -r --arg make "$TARGET_MAKE" --arg model "$TARGET_MODEL" --arg serial "$TARGET_SERIAL" '
+    to_entries
+    | map(select(.value.make == $make and .value.model == $model and .value.serial == $serial))
+    | .[0].key // empty
+' <<<"$outputs_json")
+
+if [[ -z "$monitor" ]]; then
+    echo "Home monitor (${TARGET_MAKE} ${TARGET_MODEL}) not found." >&2
+    exit 1
+fi
+
+# Turn off every output except the home monitor
+for output in $(jq -r 'keys[]' <<<"$outputs_json"); do
+    if [[ "$output" != "$monitor" ]]; then
+        echo "Turning off $output"
+        niri msg output "$output" off
+    fi
+done
+
+echo "Enabling $monitor"
+niri msg output "$monitor" on
+niri msg output "$monitor" mode 2560x1440@59.951
+niri msg output "$monitor" scale 1
+niri msg output "$monitor" position set 0 0
+niri msg output "$monitor" transform normal
+
+echo "Display reset to home monitor."
