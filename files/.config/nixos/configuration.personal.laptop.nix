@@ -258,7 +258,7 @@ hardware.graphics = {
     enable32Bit = true; # important for 32‑bit Wine/Vulkan
   };
 
-  services.xserver.videoDrivers = [ "i915" "intel" "modesetting" ];
+  services.xserver.videoDrivers = [ "intel" "modesetting" ];
   # Enable docker
   virtualisation.docker.enable = true;
 }
