@@ -5,77 +5,7 @@
 { config, pkgs, ... }:
 
 {
-
-  networking = {
-	  # Enable networking
-	networkmanager = {
-		enable = true;
-		# dns = "none";
-	 };
-	firewall.checkReversePath = false; # for wireguard
-	nameservers = [ "45.90.28.223" "45.90.30.223" ];
-  };
-  services.resolved.enable = true; # for wireguard
-
-
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-	xkb = {
-		layout = "se,us,iq";
-		options = "grp:alt_shift_toggle";
-	};
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3blocks
-		i3status-rust
-		scrot # for screenshot on lock
-      ];
-    };
-  };
-  programs.i3lock.enable = true;
-
-  services.displayManager = {
-	sddm = {
-		enable = true;
-		wayland.enable = true;
-	};
-    defaultSession = "niri";
-  };
-
-  # Disable pipewire
-  services.pipewire.enable = false;
-
-
-  # Add bluetooth management software
-  services.blueman.enable = true;
-
-  services.autorandr.enable = true;
-  services.acpid.enable = true;
-  services.ratbagd.enable = true; # logitecs mouse driver
-  services.pulseaudio.enable = true;
-  services.gnome.gnome-keyring.enable = true;
+  imports = [ ./configuration.common.nix ];
 
   xdg.mime.defaultApplications = {
      "text/html" = "librewolf.desktop";
@@ -85,9 +15,6 @@
      "x-scheme-handler/unknown" = "librewolf.desktop";
   };
 
-
-  users.defaultUserShell = pkgs.zsh;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.embercraze = {
     useDefaultShell = true;
     isNormalUser = true;
@@ -158,60 +85,23 @@
       jujutsu
       audacity
       foliate
-	  opencode
-	  inkscape
-	  blender
-	  android-tools
-	  scrcpy
-	  telegram-desktop
-	  jq
-	  wdisplays
-	  codex
+      opencode
+      inkscape
+      blender
+      android-tools
+      scrcpy
+      telegram-desktop
+      jq
+      wdisplays
+      codex
     ];
   };
 
-nixpkgs.config.permittedInsecurePackages = [
+  nixpkgs.config.permittedInsecurePackages = [
                 "electron-37.10.3"
               ];
 
-  programs.zsh.enable = true;
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = [];
-  programs.firefox = {
-	enable = true;
-	package = pkgs.librewolf;
-	policies = {
-	   DisableTelemetry = true;
-	   DisableFirefoxStudies = true;
-	   Preferences = {
-	      "apz.autoscroll.enabled" = true;
-	   };
-	};
-  };
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-  programs.tmux = {
-    enable = true;
-    plugins = with pkgs; [
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.sensible
-      tmuxPlugins.yank
-      tmuxPlugins.catppuccin
-    ];
-  };
-  programs.git = {
-    enable = true;
-	config = {
-		user = {
-			name = "embercraze";
-			email = "maher.shaker@live.se";
-		};
-	};
-  };
   programs.openvpn3.enable = true;
-  programs.niri.enable = true;
   security.pam.services.swaylock = {};
 
   fonts.packages = with pkgs; [
@@ -221,33 +111,9 @@ nixpkgs.config.permittedInsecurePackages = [
 	libertinus
   ];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
 	fuzzel swaylock mako swayidle i3bar-river waybar # niri
 	xwayland-satellite # xwayland support
   ];
-  environment.shells = with pkgs; [ zsh ];
 
-
-  # Hardware stuff
-  hardware = {
-	acpilight.enable = true;
-	bluetooth = {
-		enable = true;
-		settings = {
-			General = {
-			  Experimental = true;
-			};
-		};
-	};
-  };
-
-  # Enable docker
-  virtualisation.docker.enable = true;
 }
