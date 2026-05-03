@@ -156,8 +156,7 @@
 	  claude-code
 	  gemini-cli
       jujutsu
-	  opencode
-	  audacity
+      audacity
       foliate
 	  opencode
 	  inkscape
