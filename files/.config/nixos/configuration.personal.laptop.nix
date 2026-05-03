@@ -166,6 +166,7 @@
 	  telegram-desktop
 	  jq
 	  wdisplays
+	  codex
     ];
   };
 
