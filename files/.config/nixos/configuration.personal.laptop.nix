@@ -164,12 +164,7 @@
 	  android-tools
 	  scrcpy
 	  telegram-desktop
-	  lutris
-	  wineWow64Packages.full
-	  winetricks
-	  vulkan-tools
 	  jq
-	  steam
 	  wdisplays
     ];
   };
@@ -252,12 +247,6 @@ nixpkgs.config.permittedInsecurePackages = [
 	};
   };
 
-hardware.graphics = {
-    enable = true;
-    enable32Bit = true; # important for 32‑bit Wine/Vulkan
-  };
-
-  services.xserver.videoDrivers = [ "intel" "modesetting" ];
   # Enable docker
   virtualisation.docker.enable = true;
 }
