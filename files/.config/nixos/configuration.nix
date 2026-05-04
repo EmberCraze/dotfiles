@@ -57,17 +57,18 @@
   programs.i3lock.enable = true;
 
   services.displayManager = {
-    # enable = true;
-	sddm = {
-		enable = true;
-		wayland.enable = true;
-	};
-    # defaultSession = "none+i3";
+	ly.enable = true;
 	defaultSession = "niri";
   };
 
-  # Disable pipewire
-  services.pipewire.enable = false;
+  # Pipewire (required for screen sharing on Wayland/niri)
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
 
   # Add bluetooth management software
@@ -76,7 +77,7 @@
   services.autorandr.enable = true;
   services.acpid.enable = true;
   services.ratbagd.enable = true; # logitecs mouse driver
-  services.pulseaudio.enable = true;
+  services.pulseaudio.enable = false;
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
@@ -91,8 +92,11 @@
 
 xdg.portal = {
   enable = true;
-  extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
   config.common.default = "*";
+  config.ScreenCast = {
+	  portal = "gnome";
+  };
 };
 
 
@@ -232,17 +236,20 @@ xdg.portal = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    fuzzel swaylock mako swayidle i3bar-river waybar pipewire xdg-desktop-portal-wlr # niri
+    fuzzel swaylock mako swayidle i3bar-river waybar pipewire # niri
 	nodejs
   ];
 
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
     MOZ_DBUS_REMOTE = "1";
+	MOZ_ENABLE_WAYLAND="1";
     BROWSER = "firefox"; # or whatever browser you use
     XDG_CURRENT_DESKTOP = "niri";
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
+	GDK_BACKEND = "wayland";
+	CLUTTER_BACKEND = "wayland";
   };
 
 
