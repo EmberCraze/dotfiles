@@ -183,7 +183,7 @@ xdg.portal = {
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
 	  logseq
-	  sox
+	  sox # cloude code voice input
     ];
   };
 
