@@ -165,7 +165,6 @@ xdg.portal = {
 	  usbimager
 	  piper # Logic mouse programmer
 	  kdePackages.filelight
-	  # super-productivity
 	  gimp
 	  claude-code
       # jujutsu
