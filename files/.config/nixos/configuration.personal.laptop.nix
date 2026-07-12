@@ -117,6 +117,13 @@
   ];
 
   services.tailscale.enable = true;
+  services.geoclue2.enable = true;
+  services.redshift = {
+    enable = true;
+    package = pkgs.gammastep;
+  };
+  location.provider = "geoclue2";
+
   environment.systemPackages = with pkgs; [
 	fuzzel swaylock mako swayidle i3bar-river waybar # niri
 	xwayland-satellite # xwayland support
