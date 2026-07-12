@@ -94,11 +94,16 @@
       jq
       wdisplays
       codex
+	  just
+	  tail-tray
+	  logseq
+	  google-chrome
     ];
   };
 
   nixpkgs.config.permittedInsecurePackages = [
                 "electron-37.10.3"
+				"electron-39.8.10"
               ];
 
   programs.openvpn3.enable = true;
@@ -111,6 +116,7 @@
 	libertinus
   ];
 
+  services.tailscale.enable = true;
   environment.systemPackages = with pkgs; [
 	fuzzel swaylock mako swayidle i3bar-river waybar # niri
 	xwayland-satellite # xwayland support
