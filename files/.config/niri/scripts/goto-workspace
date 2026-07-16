@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Fuzzel picker to search and jump to a workspace.
+# Named workspaces show their name; unnamed ones show their index + output.
+
+set -euo pipefail
+
+ws=$(niri msg --json workspaces)
+
+# Build menu: "<tab-separated focus-ref>\t<display label>", sorted by output then index.
+menu=$(printf '%s' "$ws" | jq -r '
+    sort_by(.output, .idx)[]
+    | (if .name then .name else (.idx | tostring) end) as $ref
+    | (if .name then "\(.name)  ·  \(.output)"
+       else "[\(.idx)]  ·  \(.output)" end) as $label
+    | "\($ref)\t\($label)"
+')
+
+[ -z "$menu" ] && exit 0
+
+choice=$(printf '%s\n' "$menu" \
+    | fuzzel --dmenu --with-nth 2 --accept-nth 1 --prompt "Go to workspace: ")
+
+[ -z "$choice" ] && exit 0
+
+exec niri msg action focus-workspace "$choice"

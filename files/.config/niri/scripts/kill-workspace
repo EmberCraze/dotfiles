@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Fuzzel picker to "kill" (unname) a named workspace.
+# Refuses if the workspace still has windows inside.
+
+set -euo pipefail
+
+notify() {
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send -t 5000 "Kill workspace" "$1"
+    fi
+}
+
+ws=$(niri msg --json workspaces)
+
+# Only named workspaces can be killed; unnamed empty ones auto-collapse.
+menu=$(printf '%s' "$ws" | jq -r '
+    sort_by(.output, .idx)[]
+    | select(.name != null)
+    | "\(.name)\t\(.name)  ·  \(.output)"
+')
+
+if [ -z "$menu" ]; then
+    notify "No named workspaces to kill."
+    exit 0
+fi
+
+choice=$(printf '%s\n' "$menu" \
+    | fuzzel --dmenu --with-nth 2 --accept-nth 1 --prompt "Kill workspace: ")
+
+[ -z "$choice" ] && exit 0
+
+# Resolve the workspace id for the chosen name.
+wsid=$(printf '%s' "$ws" | jq -r --arg n "$choice" '.[] | select(.name == $n) | .id')
+[ -z "$wsid" ] && exit 0
+
+# Refuse if any window lives on this workspace.
+count=$(niri msg --json windows | jq --argjson id "$wsid" '[.[] | select(.workspace_id == $id)] | length')
+if [ "$count" -gt 0 ]; then
+    notify "'$choice' still has $count window(s) — not killing."
+    exit 1
+fi
+
+niri msg action unset-workspace-name "$choice"
+notify "Killed workspace '$choice'."

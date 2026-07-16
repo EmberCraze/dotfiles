@@ -635,4 +635,13 @@ binds {
 
     // Show display preset picker.
     Mod+Shift+F2 { spawn-sh "~/.config/niri/scripts/display-menu"; }
+
+    // Prompt for a name and create/focus a named workspace.
+    Mod+Shift+N hotkey-overlay-title="Create/focus named workspace" { spawn-sh "~/.config/niri/scripts/named-workspace"; }
+
+    // Search and jump to a workspace.
+    Mod+N hotkey-overlay-title="Go to workspace (picker)" { spawn-sh "~/.config/niri/scripts/goto-workspace"; }
+
+    // Kill (unname) an empty named workspace; refuses if it has windows.
+    Mod+Ctrl+N hotkey-overlay-title="Kill named workspace" { spawn-sh "~/.config/niri/scripts/kill-workspace"; }
 }

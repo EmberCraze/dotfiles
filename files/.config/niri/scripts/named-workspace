@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Prompt for a workspace name, then create/focus a named workspace.
+# If a workspace with that name already exists, just focus it.
+# Otherwise name the trailing empty workspace on the focused output and focus it.
+
+set -euo pipefail
+
+name=$(printf '' | fuzzel --dmenu --prompt "Workspace name: ")
+name="${name#"${name%%[![:space:]]*}"}"  # trim leading whitespace
+name="${name%"${name##*[![:space:]]}"}"   # trim trailing whitespace
+[ -z "$name" ] && exit 0
+
+ws=$(niri msg --json workspaces)
+
+# Already exists? Just focus it.
+if printf '%s' "$ws" | jq -e --arg n "$name" 'any(.[]; .name == $n)' >/dev/null; then
+    exec niri msg action focus-workspace "$name"
+fi
+
+# Find an empty, unnamed workspace on the currently focused output.
+output=$(printf '%s' "$ws" | jq -r '.[] | select(.is_focused) | .output')
+empty_idx=$(printf '%s' "$ws" | jq -r --arg o "$output" \
+    'map(select(.output == $o and .name == null and .active_window_id == null))
+     | (.[0].idx // empty)')
+
+if [ -n "$empty_idx" ]; then
+    niri msg action focus-workspace "$empty_idx"
+fi
+
+niri msg action set-workspace-name "$name"
