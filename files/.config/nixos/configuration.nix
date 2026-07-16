@@ -4,6 +4,32 @@
 
 { config, pkgs, ... }:
 
+let
+  librewolfCurrentWorkspace = pkgs.writeShellApplication {
+    name = "librewolf-current-workspace";
+    runtimeInputs = with pkgs; [
+      coreutils
+      jq
+      librewolf
+      niri
+    ];
+    text = builtins.readFile ./scripts/librewolf-current-workspace.sh;
+  };
+
+  librewolfCurrentWorkspaceDesktop = pkgs.makeDesktopItem {
+    name = "librewolf-current-workspace";
+    desktopName = "LibreWolf Current Workspace";
+    exec = "${librewolfCurrentWorkspace}/bin/librewolf-current-workspace %u";
+    terminal = false;
+    mimeTypes = [
+      "text/html"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/about"
+      "x-scheme-handler/unknown"
+    ];
+  };
+in
 {
 
   networking = {
@@ -81,13 +107,15 @@
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
+# fingerprint reader
+  services.fprintd.enable = true;
 
   xdg.mime.defaultApplications = {
-     "text/html" = "librewolf.desktop";
-     "x-scheme-handler/http" = "librewolf.desktop";
-     "x-scheme-handler/https" = "librewolf.desktop";
-     "x-scheme-handler/about" = "librewolf.desktop";
-     "x-scheme-handler/unknown" = "librewolf.desktop";
+     "text/html" = "librewolf-current-workspace.desktop";
+     "x-scheme-handler/http" = "librewolf-current-workspace.desktop";
+     "x-scheme-handler/https" = "librewolf-current-workspace.desktop";
+     "x-scheme-handler/about" = "librewolf-current-workspace.desktop";
+     "x-scheme-handler/unknown" = "librewolf-current-workspace.desktop";
   };
 
 xdg.portal = {
@@ -181,8 +209,9 @@ xdg.portal = {
 	  wdisplays # wayland
 	  wl-clipboard # wayland
 	  grim # screenshot flameshot
-	  logseq
+	  # logseq # commented out because of old elektron version
 	  sox # cloude code voice input
+	  zathura # pdf reader
     ];
   };
 
@@ -206,6 +235,7 @@ xdg.portal = {
   };
   programs.tmux = {
     enable = true;
+	keyMode = "vi";
     plugins = with pkgs; [
       tmuxPlugins.vim-tmux-navigator
       tmuxPlugins.sensible
@@ -237,13 +267,24 @@ xdg.portal = {
   environment.systemPackages = with pkgs; [
     fuzzel swaylock mako swayidle i3bar-river waybar pipewire # niri
 	nodejs
+    librewolfCurrentWorkspace
+    librewolfCurrentWorkspaceDesktop
   ];
+  security.pam.services.swaylock = {};
+  security.pam.services.swaylock.fprintAuth = true;
+  security.pam.services.swaylock = {
+    text = ''
+      auth sufficient pam_unix.so try_first_pass likeauth nullok
+      auth sufficient pam_fprintd.so
+      auth include login
+  '';
+};
 
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
     MOZ_DBUS_REMOTE = "1";
 	MOZ_ENABLE_WAYLAND="1";
-    BROWSER = "firefox"; # or whatever browser you use
+    BROWSER = "librewolf-current-workspace";
     XDG_CURRENT_DESKTOP = "niri";
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
