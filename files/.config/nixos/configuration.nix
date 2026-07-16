@@ -212,6 +212,8 @@ xdg.portal = {
 	  # logseq # commented out because of old elektron version
 	  sox # cloude code voice input
 	  zathura # pdf reader
+	  #handy
+	  #wtype
     ];
   };
 
