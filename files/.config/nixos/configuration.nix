@@ -179,29 +179,29 @@ xdg.portal = {
       stylua # lua code formatter
       feh
       redshift # eye strain filter
-      jetbrains.pycharm
+      # jetbrains.pycharm
       nemo-with-extensions # file browser
       lua-language-server
       bash-language-server
 	  openssl
-	  signal-desktop
+	  # signal-desktop
 	  ltex-ls-plus
 	  xkb-switch
 	  gh # github cli
-	  terraform
+	  # terraform
 	  blanket
 	  usbimager
-	  piper # Logic mouse programmer
+	  # piper # Logic mouse programmer
 	  kdePackages.filelight
 	  gimp
 	  claude-code
       # jujutsu
 	  opencode
-	  audacity
+	  # audacity
       foliate
 	  jq
-	  obsidian
-	  ansible
+	  # obsidian
+	  # ansible
 	  ffmpeg
 	  tail-tray
 	  vscode-json-languageserver # json lsp
@@ -212,8 +212,8 @@ xdg.portal = {
 	  # logseq # commented out because of old elektron version
 	  sox # cloude code voice input
 	  zathura # pdf reader
-	  #handy
-	  #wtype
+	  # handy
+	  # wtype
     ];
   };
 
