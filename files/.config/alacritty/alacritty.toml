@@ -44,3 +44,4 @@ y = 0
 
 [general]
 import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/catppuccin.toml"]
+# import = ["/home/embercraze/.config/alacritty/alacritty-theme/themes/catppuccin_latte.toml"]
