@@ -214,6 +214,7 @@ xdg.portal = {
 	  zathura # pdf reader
 	  # handy
 	  # wtype
+	  ghostty
     ];
   };
 
