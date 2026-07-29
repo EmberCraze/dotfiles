@@ -215,7 +215,30 @@ xdg.portal = {
 	  # handy
 	  # wtype
 	  ghostty
+	  vicinae
     ];
+  };
+
+  # Autostart the vicinae launcher daemon with the graphical session.
+  # Mirrors the unit shipped in ${pkgs.vicinae}/share/systemd/user/vicinae.service,
+  # which is never enabled by just installing the package. Redefining it here
+  # (rather than symlinking the packaged unit into graphical-session.target.wants)
+  # because /etc/systemd/user is a read-only store dir we can't add subdirs to.
+  systemd.user.services.vicinae = {
+    description = "Vicinae Launcher Daemon";
+    documentation = [ "https://docs.vicinae.com" ];
+    requires = [ "dbus.socket" ];
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.vicinae}/bin/vicinae server --replace";
+      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      Restart = "always";
+      RestartSec = 60;
+      KillMode = "process";
+    };
   };
 
   programs.zsh.enable = true;
