@@ -265,6 +265,28 @@ xdg.portal = {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Workaround: niri 26.04 vendors libdisplay-info-sys 0.3.0, whose build.rs
+  # requires the system libdisplay-info to be < 0.4.0. nixos-unstable bumped
+  # libdisplay-info to 0.4.0, which breaks the niri build. Build niri against a
+  # pinned 0.3.0 (only affects niri; the rest of the system keeps 0.4.0).
+  # Remove once niri in nixpkgs is updated to accept libdisplay-info 0.4.
+  nixpkgs.overlays = [
+    (final: prev: {
+      niri = prev.niri.override {
+        libdisplay-info = prev.libdisplay-info.overrideAttrs (old: {
+          version = "0.3.0";
+          src = prev.fetchFromGitLab {
+            domain = "gitlab.freedesktop.org";
+            owner = "emersion";
+            repo = "libdisplay-info";
+            rev = "0.3.0";
+            hash = "sha256-nXf2KGovNKvcchlHlzKBkAOeySMJXgxMpbi5z9gLrdc=";
+          };
+        });
+      };
+    })
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
