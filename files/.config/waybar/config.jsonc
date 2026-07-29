@@ -178,6 +178,7 @@
     "custom/prayer-times": {
         "format" : "{}",
         "tooltip": false,
-        "exec": "python ~/.config/i3status-rust/scripts/next-prayer.py strangnas sweden"
+        "exec": "python ~/.config/i3status-rust/scripts/next-prayer.py strangnas sweden",
+		"interval": 60
     }
 }
