@@ -109,6 +109,7 @@ in
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
 # fingerprint reader
   services.fprintd.enable = true;
+  services.gvfs.enable = true; # for nemo remote file explorer
 
   xdg.mime.defaultApplications = {
      "text/html" = "librewolf-current-workspace.desktop";
