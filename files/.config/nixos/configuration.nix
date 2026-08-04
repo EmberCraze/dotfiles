@@ -110,6 +110,7 @@ in
 # fingerprint reader
   services.fprintd.enable = true;
   services.gvfs.enable = true; # for nemo remote file explorer
+  services.upower.enable = true; # for battery indicator in Dank bar
 
   xdg.mime.defaultApplications = {
      "text/html" = "librewolf-current-workspace.desktop";
@@ -162,7 +163,7 @@ xdg.portal = {
       brave
       brightnessctl
       libnotify
-      dunst
+      # dunst  # conflicts with DMS: both claim org.freedesktop.Notifications
       pyright
       killall
       xkill
@@ -280,6 +281,7 @@ xdg.portal = {
 	};
   };
   programs.niri.enable = true;
+  programs.dms-shell.enable = true;
 
   fonts.packages = with pkgs; [
     font-awesome
