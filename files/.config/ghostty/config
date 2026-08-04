@@ -1,3 +1,4 @@
 window-decoration = none
 gtk-titlebar = false
-theme = Breadog
+theme = dankcolors
+background-opacity = 0.97
