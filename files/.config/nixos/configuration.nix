@@ -107,8 +107,8 @@ in
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
-# fingerprint reader
-  services.fprintd.enable = true;
+  services.fprintd.enable = true; # fingerprint reader
+
   services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
 
