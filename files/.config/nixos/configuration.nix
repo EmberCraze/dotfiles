@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   librewolfCurrentWorkspace = pkgs.writeShellApplication {
@@ -258,6 +258,10 @@ xdg.portal = {
     after = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     wantedBy = [ "graphical-session.target" ];
+    # Give launched apps a real user PATH — the default unit PATH only has
+    # coreutils etc., so bare Exec= entries in .desktop files (e.g. wdisplays)
+    # fail to resolve.
+    environment.PATH = lib.mkForce "/home/embercraze/.local/bin:/run/wrappers/bin:/home/embercraze/.nix-profile/bin:/etc/profiles/per-user/embercraze/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.vicinae}/bin/vicinae server --replace";
