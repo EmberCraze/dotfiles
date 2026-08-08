@@ -163,7 +163,6 @@ xdg.portal = {
     extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       neovim
-      networkmanagerapplet
       alacritty
       gnumake
       stow
