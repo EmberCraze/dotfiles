@@ -271,6 +271,7 @@ layout {
 // spawn-at-startup "waybar"
 // spawn-at-startup "nm-applet"
 spawn-at-startup "dms" "run"
+spawn-sh-at-startup "sleep 2 && ~/.config/niri/scripts/workspace-session restore"
 // spawn-at-startup "i3bar-river"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:

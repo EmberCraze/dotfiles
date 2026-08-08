@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Save named niri workspaces to a file and recreate them after a restart.
+#   workspace-session save     — snapshot current named workspaces
+#   workspace-session restore  — recreate them (safe to run repeatedly)
+
+set -euo pipefail
+
+state_file="${XDG_STATE_HOME:-$HOME/.local/state}/niri/workspaces.json"
+
+save() {
+    mkdir -p "$(dirname "$state_file")"
+    niri msg --json workspaces \
+        | jq '[.[] | select(.name != null)] | sort_by(.output, .idx)
+              | map({name, output, idx})' >"$state_file"
+    echo "Saved $(jq length "$state_file") workspaces to $state_file"
+}
+
+restore() {
+    [ -s "$state_file" ] || { echo "No saved state at $state_file" >&2; exit 1; }
+
+    jq -c '.[]' "$state_file" | while read -r entry; do
+        name=$(jq -r '.name' <<<"$entry")
+        output=$(jq -r '.output' <<<"$entry")
+
+        ws=$(niri msg --json workspaces)
+
+        # Skip if it already exists.
+        jq -e --arg n "$name" 'any(.[]; .name == $n)' <<<"$ws" >/dev/null && continue
+
+        # Name the trailing empty workspace on the target output (fall back
+        # to the focused output if that monitor isn't connected).
+        idx=$(jq -r --arg o "$output" \
+            'map(select(.output == $o and .name == null and .active_window_id == null))
+             | (.[0].idx // empty)' <<<"$ws")
+
+        if [ -n "$idx" ]; then
+            niri msg action focus-monitor "$output" 2>/dev/null || true
+            niri msg action focus-workspace "$idx"
+        fi
+        niri msg action set-workspace-name "$name"
+    done
+
+    # Put workspaces in their saved order (ascending, so earlier moves
+    # don't get displaced by later ones).
+    jq -c 'sort_by(.idx) | .[]' "$state_file" | while read -r entry; do
+        name=$(jq -r '.name' <<<"$entry")
+        idx=$(jq -r '.idx' <<<"$entry")
+        niri msg action move-workspace-to-index --reference "$name" "$idx" 2>/dev/null || true
+    done
+    echo "Restored workspaces from $state_file"
+}
+
+case "${1:-}" in
+    save) save ;;
+    restore) restore ;;
+    *) echo "Usage: workspace-session save|restore" >&2; exit 1 ;;
+esac
