@@ -123,7 +123,7 @@ in
 
 
   # Add bluetooth management software
-  services.blueman.enable = true;
+  # services.blueman.enable = true; # disabled: DMS bluetooth widget covers this
 
   services.autorandr.enable = true;
   services.acpid.enable = true;
