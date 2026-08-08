@@ -242,6 +242,7 @@ xdg.portal = {
 	  # handy
 	  # wtype
 	  ghostty
+	  herdr
 	  vicinae
     ];
   };
