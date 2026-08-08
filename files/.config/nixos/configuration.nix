@@ -199,7 +199,7 @@ xdg.portal = {
       nomacs
       typescript-language-server # ts lsp
       prettier # js formatter
-      code-cursor
+      # code-cursor
       gparted
       ruff # python code formatter and linter
       uv # python package manager
