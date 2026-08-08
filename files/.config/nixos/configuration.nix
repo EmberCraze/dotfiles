@@ -58,80 +58,6 @@ in
 {
   imports = [ ./configuration.common.nix ];
 
-  networking = {
-	  # Enable networking
-	networkmanager = {
-		enable = true;
-		# dns = "none";
-	 };
-	firewall.checkReversePath = false; # for wireguard
-	nameservers = [ "45.90.28.223" "45.90.30.223" ];
-  };
-  services.resolved.enable = true; # for wireguard
-
-
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-	xkb = {
-		layout = "se,us,iq";
-		options = "grp:alt_shift_toggle";
-	};
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3blocks
-		i3status-rust
-		scrot # for screenshot on lock
-      ];
-    };
-  };
-  programs.i3lock.enable = true;
-
-  services.displayManager = {
-	ly.enable = true;
-	defaultSession = "niri";
-  };
-
-  # Pipewire (required for screen sharing on Wayland/niri)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-
-  # Add bluetooth management software
-  # services.blueman.enable = true; # disabled: DMS bluetooth widget covers this
-
-  services.autorandr.enable = true;
-  services.acpid.enable = true;
-  services.ratbagd.enable = true; # logitecs mouse driver
-  services.pulseaudio.enable = false;
-  services.gnome.gnome-keyring.enable = true;
-  services.tailscale.enable = true;
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
   services.fprintd.enable = true; # fingerprint reader
 
@@ -156,95 +82,36 @@ xdg.portal = {
 };
 
 
-  users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.embercraze = {
     useDefaultShell = true;
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker"];
-    packages = with pkgs; [
-      neovim
-      alacritty
-      gnumake
-      stow
-      pavucontrol
-      rofi
-      keychain
-      zoxide
-      bottom
-      lsd
-      bat
-      fzf
-      slack
-      wireguard-tools
-      lazygit
-      flameshot
-      xclip
-      gcc
-      pyright
-      python313
-      arandr
-      ripgrep
-      brave
-      brightnessctl
-      libnotify
+    extraGroups = config.my.sharedUserExtraGroups;
+    packages = config.my.sharedUserPackages ++ (with pkgs; [
       # dunst  # conflicts with DMS: both claim org.freedesktop.Notifications
-      pyright
-      killall
-      xkill
-      playerctl
-      peek
-      pnpm
-      mpv
-      nomacs
-      typescript-language-server # ts lsp
-      prettier # js formatter
       # code-cursor
-      gparted
-      ruff # python code formatter and linter
-      uv # python package manager
-      stylua # lua code formatter
-      feh
-      redshift # eye strain filter
       # jetbrains.pycharm
-      nemo-with-extensions # file browser
-      lua-language-server
-      bash-language-server
-	  openssl
-	  # signal-desktop
-	  ltex-ls-plus
-	  xkb-switch
-	  gh # github cli
-	  # terraform
-	  blanket
-	  usbimager
-	  # piper # Logic mouse programmer
-	  kdePackages.filelight
-	  gimp
-	  claude-code
+      # signal-desktop
+      # terraform
+      # piper # Logic mouse programmer
       # jujutsu
-	  opencode
-	  # audacity
-      foliate
-	  jq
-	  # obsidian
-	  # ansible
-	  ffmpeg
-	  tail-tray
-	  vscode-json-languageserver # json lsp
-	  zed-editor
-	  wdisplays # wayland
-	  wl-clipboard # wayland
-	  grim # screenshot flameshot
-	  # logseq # commented out because of old elektron version
-	  sox # cloude code voice input
-	  zathura # pdf reader
-	  # handy
-	  # wtype
-	  ghostty
-	  herdr
-	  vicinae
-    ];
+      # audacity
+      # obsidian
+      # ansible
+      ffmpeg
+      vscode-json-languageserver # json lsp
+      zed-editor
+      wl-clipboard # wayland
+      grim # screenshot flameshot
+      # logseq # commented out because of old elektron version
+      sox # cloude code voice input
+      zathura # pdf reader
+      # handy
+      # wtype
+      ghostty
+      herdr
+      vicinae
+    ]);
   };
 
   # Autostart the vicinae launcher daemon with the graphical session.
@@ -273,65 +140,19 @@ xdg.portal = {
     };
   };
 
-  programs.zsh.enable = true;
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = [];
-  programs.firefox = {
-	enable = true;
-	package = pkgs.librewolf;
-	policies = {
-	   DisableTelemetry = true;
-	   DisableFirefoxStudies = true;
-	   Preferences = {
-	      "apz.autoscroll.enabled" = true;
-	   };
-	};
-  };
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-  programs.tmux = {
-    enable = true;
-	keyMode = "vi";
-    plugins = with pkgs; [
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.sensible
-      tmuxPlugins.yank
-      tmuxPlugins.catppuccin
-    ];
-  };
-  programs.git = {
-    enable = true;
-	config = {
-		user = {
-			name = "embercraze";
-			email = "maher.shaker@live.se";
-		};
-	};
-  };
-  programs.niri.enable = true;
+  programs.tmux.keyMode = "vi";
   programs.dms-shell.enable = true;
-
-  fonts.packages = with pkgs; [
-    font-awesome
-    nerd-fonts.mononoki
-  ];
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    fuzzel swaylock mako swayidle i3bar-river waybar pipewire # niri
+	pipewire # niri
 	nodejs
     librewolfCurrentWorkspace
     librewolfCurrentWorkspaceDesktop
     braveCurrentWorkspace
     braveCurrentWorkspaceDesktop
   ];
-  security.pam.services.swaylock = {};
   security.pam.services.swaylock.fprintAuth = true;
   security.pam.services.swaylock = {
     text = ''
@@ -341,7 +162,6 @@ xdg.portal = {
   '';
 };
 
-  environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
     MOZ_DBUS_REMOTE = "1";
 	MOZ_ENABLE_WAYLAND="1";
@@ -353,20 +173,4 @@ xdg.portal = {
 	CLUTTER_BACKEND = "wayland";
   };
 
-
-  # Hardware stuff
-  hardware = {
-	acpilight.enable = true;
-	bluetooth = {
-		enable = true;
-		settings = {
-			General = {
-			  Experimental = true;
-			};
-		};
-	};
-  };
-
-  # Enable docker
-  virtualisation.docker.enable = true;
 }

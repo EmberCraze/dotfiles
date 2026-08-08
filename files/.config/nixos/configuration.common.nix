@@ -1,13 +1,27 @@
 # Shared NixOS configuration used by both machines.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  networking = {
+  options.my.sharedUserPackages = lib.mkOption {
+    type = lib.types.listOf lib.types.package;
+    default = [];
+    description = "Packages shared by users on all configured machines.";
+  };
+
+  options.my.sharedUserExtraGroups = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [];
+    description = "Extra groups shared by users on all configured machines.";
+  };
+
+  config = {
+    networking = {
+	# Enable networking
     networkmanager = {
       enable = true;
     };
-    firewall.checkReversePath = false;
+    firewall.checkReversePath = false; # for wireguard
     nameservers = [ "45.90.28.223" "45.90.30.223" ];
   };
 
@@ -48,12 +62,14 @@
   };
 
   programs.i3lock.enable = true;
+  security.pam.services.swaylock = {};
 
   services.displayManager = {
     ly.enable = true;
     defaultSession = "niri";
   };
 
+  # Required for niri screen sharing
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -65,9 +81,10 @@
   services.blueman.enable = false;
   services.autorandr.enable = true;
   services.acpid.enable = true;
-  services.ratbagd.enable = true;
+  # services.ratbagd.enable = true; # Mouse driver
   services.pulseaudio.enable = false;
   services.gnome.gnome-keyring.enable = true;
+  services.tailscale.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -114,7 +131,84 @@
 
   programs.niri.enable = true;
 
+  my.sharedUserPackages = with pkgs; [
+    neovim
+    alacritty
+    gnumake
+    stow
+    pavucontrol
+    rofi
+    keychain
+    zoxide
+    bottom
+    lsd
+    bat
+    fzf
+    slack
+    wireguard-tools
+    lazygit
+    flameshot
+    xclip
+    gcc
+    pyright
+    python313
+    arandr
+    ripgrep
+    brave
+    brightnessctl
+    libnotify
+    killall
+    xkill
+    playerctl
+    peek
+    pnpm
+    mpv
+    nomacs
+    typescript-language-server # ts lsp
+    prettier # js formatter
+    gparted
+    ruff # python code formatter and linter
+    uv # python package manager
+    stylua # lua code formatter
+    feh
+    redshift # eye strain filter
+    nemo-with-extensions # file browser
+    lua-language-server
+    bash-language-server
+    openssl
+    ltex-ls-plus
+    xkb-switch
+    gh # github cli
+    blanket
+    usbimager
+    kdePackages.filelight
+    gimp
+    claude-code
+    foliate
+    opencode
+    jq
+    tail-tray
+    wdisplays # wayland
+  ];
+
+  my.sharedUserExtraGroups = [ "networkmanager" "wheel" "docker" ];
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    nerd-fonts.mononoki
+  ];
+
   nixpkgs.config.allowUnfree = true;
+
+  environment.systemPackages = with pkgs; [
+    fuzzel
+    swaylock
+    mako
+    swayidle
+    i3bar-river
+    waybar
+    xwayland-satellite
+  ];
 
   environment.shells = with pkgs; [ zsh ];
 
@@ -130,5 +224,6 @@
     };
   };
 
-  virtualisation.docker.enable = true;
+    virtualisation.docker.enable = true;
+  };
 }
