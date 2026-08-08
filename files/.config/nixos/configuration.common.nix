@@ -50,20 +50,23 @@
   programs.i3lock.enable = true;
 
   services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
+    ly.enable = true;
     defaultSession = "niri";
   };
 
-  services.pipewire.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
-  services.blueman.enable = true;
+  services.blueman.enable = false;
   services.autorandr.enable = true;
   services.acpid.enable = true;
   services.ratbagd.enable = true;
-  services.pulseaudio.enable = true;
+  services.pulseaudio.enable = false;
   services.gnome.gnome-keyring.enable = true;
 
   users.defaultUserShell = pkgs.zsh;

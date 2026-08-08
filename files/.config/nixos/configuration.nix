@@ -56,6 +56,7 @@ let
   };
 in
 {
+  imports = [ ./configuration.common.nix ];
 
   networking = {
 	  # Enable networking
