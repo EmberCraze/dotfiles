@@ -1,0 +1,39 @@
+onboarding = false
+# Place this file at ~/.config/herdr/config.toml
+
+[terminal]
+# New panes/tabs/workspaces inherit the cwd of the pane they're created from
+new_cwd = "follow"
+
+[keys]
+# Prefix key to enter prefix mode (default: "ctrl+b")
+prefix = "ctrl+space"
+
+# Pane navigation without the prefix
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+
+# tmux-style splits
+split_vertical = "prefix+%"
+split_horizontal = "prefix+\""
+
+[ui]
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = true
+
+# Agent panel rows: show the pane name (set from the first prompt by
+# ~/.claude/hooks/herdr-pane-name.sh) under the workspace/tab line.
+[ui.sidebar.agents]
+rows = [["state_icon", "workspace", "tab"], ["pane"], ["agent"]]
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "catppuccin"
+auto_switch = false
