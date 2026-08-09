@@ -13,7 +13,7 @@
     extraGroups = config.my.sharedUserExtraGroups;
     packages = config.my.sharedUserPackages ++ (with pkgs; [
       networkmanagerapplet
-      dunst
+      # dunst
       code-cursor
       vscode # desktop computer
 	  piper # Logic mouse programmer
