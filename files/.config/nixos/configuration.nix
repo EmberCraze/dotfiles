@@ -7,7 +7,6 @@
   imports = [ ./configuration.common.nix ];
 
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
-  services.fprintd.enable = true; # fingerprint reader
 
   services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
@@ -43,14 +42,5 @@
 
   programs.tmux.keyMode = "vi";
   programs.dms-shell.enable = true;
-
-  security.pam.services.swaylock.fprintAuth = true;
-  security.pam.services.swaylock = {
-    text = ''
-      auth sufficient pam_unix.so try_first_pass likeauth nullok
-      auth sufficient pam_fprintd.so
-      auth include login
-  '';
-};
 
 }

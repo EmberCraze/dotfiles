@@ -114,6 +114,12 @@ in
 
   programs.i3lock.enable = true;
   security.pam.services.swaylock = {};
+  security.pam.services.swaylock.fprintAuth = true;
+  security.pam.services.swaylock.text = ''
+    auth sufficient pam_unix.so try_first_pass likeauth nullok
+    auth sufficient pam_fprintd.so
+    auth include login
+  '';
 
   services.displayManager = {
     ly.enable = true;
@@ -136,6 +142,7 @@ in
   services.pulseaudio.enable = false;
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
+  services.fprintd.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
 
