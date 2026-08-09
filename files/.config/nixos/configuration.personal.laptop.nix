@@ -51,4 +51,14 @@
   };
   location.provider = "geoclue2";
 
+  security.polkit.extraConfig = ''
+    // Fingerprint templates are per-user; permit this account to manage its own.
+    polkit.addRule(function(action, subject) {
+      if (action.id == "net.reactivated.fprint.device.enroll" &&
+          subject.user == "embercraze") {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
 }
