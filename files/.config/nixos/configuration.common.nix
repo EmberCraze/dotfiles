@@ -266,6 +266,8 @@ in
     librewolfCurrentWorkspaceDesktop
     braveCurrentWorkspace
     braveCurrentWorkspaceDesktop
+    pipewire
+    nodejs
   ];
 
   environment.shells = with pkgs; [ zsh ];

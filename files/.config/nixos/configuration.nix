@@ -54,12 +54,6 @@ xdg.portal = {
   programs.tmux.keyMode = "vi";
   programs.dms-shell.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-	pipewire # niri
-	nodejs
-  ];
   security.pam.services.swaylock.fprintAuth = true;
   security.pam.services.swaylock = {
     text = ''

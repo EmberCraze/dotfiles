@@ -14,7 +14,6 @@
     packages = config.my.sharedUserPackages ++ (with pkgs; [
       networkmanagerapplet
       dunst
-      nodejs
       code-cursor
       vscode # desktop computer
 	  piper # Logic mouse programmer
