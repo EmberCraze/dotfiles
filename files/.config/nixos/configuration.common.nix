@@ -252,6 +252,7 @@ in
     ghostty
     herdr
     vicinae
+	nixfmt
   ];
 
   my.sharedUserExtraGroups = [ "networkmanager" "wheel" "docker" ];
