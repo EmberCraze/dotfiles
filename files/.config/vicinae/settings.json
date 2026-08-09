@@ -1,0 +1,67 @@
+// This configuration is merged with the default vicinae configuration file, which you can obtain by running the `vicinae config default` command.
+// Every item defined in this file takes precedence over the values defined in the default config or any other imported file.
+//
+// You can make manual edits to this file, however you should keep in mind that this file may be written to by vicinae when a configuration change is made through the GUI.
+// When that happens, any custom comments or formatting will be lost.
+//
+// If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
+//
+// Learn more about configuration at https://docs.vicinae.com/config
+
+{
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "launcher_window": {
+      "opacity": 1,
+      "compact_mode": {
+         "enabled": true
+      },
+      "material": "blur"
+   },
+   "providers": {
+      "@knoopx/store.vicinae.niri": {
+         "entrypoints": {
+            "clear-dynamic-cast-target": {
+               "enabled": false
+            }
+         }
+      },
+      "@thomaslombart/store.raycast.linear": {
+         "enabled": true
+      },
+      "applications": {
+         "preferences": {
+            "defaultAction": "launch",
+            "paths": [
+               "/home/embercraze/.local/share/applications",
+               "/nix/store/4wijc9xb819fqrhjbw8brx8d06hl49m8-vicinae-0.23.2/share/applications",
+               "/nix/store/2rr4cw66qfhxy5pjxgic9dqrg6y497zw-cups-2.4.19/share/applications",
+               "/nix/store/3r10j3q6hdsglyq7dbxbjhw7abr26srn-cups-2.4.19-lib/share/applications",
+               "/nix/store/06xhsrgnf0ffca8zklbhwx1hmxajasdb-fontconfig-2.18.2-lib/share/applications",
+               "/nix/store/f5nm1v8x753qjipd6iblyfm3p8camsdp-util-linux-2.42.2-lib/share/applications",
+               "/nix/store/hbg7ib0c60pn7hi8sx7w5yvs8yfahwgw-systemd-261.1/share/applications",
+               "/nix/store/wjvib527dhnf4w04m1axnjv05yr60jn3-glib-2.88.1/share/applications",
+               "/nix/store/g4ylgfr6jw3wrvgqh0ifvvjpnn6rabzv-gettext-1.0/share/applications",
+               "/nix/store/6wj55qjnbz64yccfl3yvyiazwvk2dlix-libqalculate-5.12.0/share/applications",
+               "/nix/store/rfp9z4mg9nyaq0rq58297frqysf2qlnk-syntax-highlighting-6.28.0/share/applications",
+               "/nix/store/ipf9vp574y2gxslihc836yvikmvdqfsa-desktops/share/applications",
+               "/home/embercraze/.nix-profile/share/applications",
+               "/nix/profile/share/applications",
+               "/home/embercraze/.local/state/nix/profile/share/applications",
+               "/etc/profiles/per-user/embercraze/share/applications",
+               "/nix/var/nix/profiles/default/share/applications",
+               "/run/current-system/sw/share/applications"
+            ]
+         }
+      },
+      "browser-extension": {
+         "enabled": false
+      },
+      "shortcuts": {
+         "entrypoints": {
+            "sct-37f73f6e1803": {
+               "enabled": false
+            }
+         }
+      }
+   }
+}
