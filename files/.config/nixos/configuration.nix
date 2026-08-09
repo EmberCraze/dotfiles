@@ -6,8 +6,6 @@
 {
   imports = [ ./configuration.common.nix ];
 
-  services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
-
   services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
 
