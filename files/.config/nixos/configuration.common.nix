@@ -240,6 +240,8 @@ in
     jq
     tail-tray
     wdisplays # wayland
+    ghostty
+    herdr
     vicinae
   ];
 
