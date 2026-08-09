@@ -14,15 +14,15 @@
     packages = config.my.sharedUserPackages ++ (with pkgs; [
       networkmanagerapplet
       # dunst
-      code-cursor
+      # code-cursor
       vscode # desktop computer
-	  piper # Logic mouse programmer
-	  super-productivity
-	  gemini-cli
-      jujutsu
-      audacity
+	  # piper # Logic mouse programmer
+	  # super-productivity
+	  # gemini-cli
+      # jujutsu
+      # audacity
       inkscape
-      blender
+      # blender
       android-tools
       scrcpy
       telegram-desktop
