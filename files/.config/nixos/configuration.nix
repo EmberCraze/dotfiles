@@ -3,58 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
-let
-  librewolfCurrentWorkspace = pkgs.writeShellApplication {
-    name = "librewolf-current-workspace";
-    runtimeInputs = with pkgs; [
-      coreutils
-      jq
-      librewolf
-      niri
-    ];
-    text = builtins.readFile ./scripts/librewolf-current-workspace.sh;
-  };
-
-  librewolfCurrentWorkspaceDesktop = pkgs.makeDesktopItem {
-    name = "librewolf-current-workspace";
-    desktopName = "LibreWolf Current Workspace";
-    exec = "${librewolfCurrentWorkspace}/bin/librewolf-current-workspace %u";
-    terminal = false;
-    mimeTypes = [
-      "text/html"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-      "x-scheme-handler/about"
-      "x-scheme-handler/unknown"
-    ];
-  };
-
-  braveCurrentWorkspace = pkgs.writeShellApplication {
-    name = "brave-current-workspace";
-    runtimeInputs = with pkgs; [
-      coreutils
-      jq
-      brave
-      niri
-    ];
-    text = builtins.readFile ./scripts/brave-current-workspace.sh;
-  };
-
-  braveCurrentWorkspaceDesktop = pkgs.makeDesktopItem {
-    name = "brave-current-workspace";
-    desktopName = "Brave Current Workspace";
-    exec = "${braveCurrentWorkspace}/bin/brave-current-workspace %u";
-    terminal = false;
-    mimeTypes = [
-      "text/html"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-      "x-scheme-handler/about"
-      "x-scheme-handler/unknown"
-    ];
-  };
-in
 {
   imports = [ ./configuration.common.nix ];
 
@@ -63,14 +11,6 @@ in
 
   services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
-
-  xdg.mime.defaultApplications = {
-     "text/html" = "brave-current-workspace.desktop";
-     "x-scheme-handler/http" = "brave-current-workspace.desktop";
-     "x-scheme-handler/https" = "brave-current-workspace.desktop";
-     "x-scheme-handler/about" = "brave-current-workspace.desktop";
-     "x-scheme-handler/unknown" = "brave-current-workspace.desktop";
-  };
 
 xdg.portal = {
   enable = true;
@@ -148,10 +88,6 @@ xdg.portal = {
   environment.systemPackages = with pkgs; [
 	pipewire # niri
 	nodejs
-    librewolfCurrentWorkspace
-    librewolfCurrentWorkspaceDesktop
-    braveCurrentWorkspace
-    braveCurrentWorkspaceDesktop
   ];
   security.pam.services.swaylock.fprintAuth = true;
   security.pam.services.swaylock = {
@@ -161,16 +97,5 @@ xdg.portal = {
       auth include login
   '';
 };
-
-  environment.sessionVariables = {
-    MOZ_DBUS_REMOTE = "1";
-	MOZ_ENABLE_WAYLAND="1";
-    BROWSER = "brave-current-workspace";
-    XDG_CURRENT_DESKTOP = "niri";
-    XDG_SESSION_TYPE = "wayland";
-    NIXOS_OZONE_WL = "1";
-	GDK_BACKEND = "wayland";
-	CLUTTER_BACKEND = "wayland";
-  };
 
 }
