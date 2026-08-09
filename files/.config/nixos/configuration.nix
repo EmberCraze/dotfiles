@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   imports = [ ./configuration.common.nix ];
 
@@ -50,34 +50,7 @@ xdg.portal = {
       # wtype
       ghostty
       herdr
-      vicinae
     ]);
-  };
-
-  # Autostart the vicinae launcher daemon with the graphical session.
-  # Mirrors the unit shipped in ${pkgs.vicinae}/share/systemd/user/vicinae.service,
-  # which is never enabled by just installing the package. Redefining it here
-  # (rather than symlinking the packaged unit into graphical-session.target.wants)
-  # because /etc/systemd/user is a read-only store dir we can't add subdirs to.
-  systemd.user.services.vicinae = {
-    description = "Vicinae Launcher Daemon";
-    documentation = [ "https://docs.vicinae.com" ];
-    requires = [ "dbus.socket" ];
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    # Give launched apps a real user PATH — the default unit PATH only has
-    # coreutils etc., so bare Exec= entries in .desktop files (e.g. wdisplays)
-    # fail to resolve.
-    environment.PATH = lib.mkForce "/home/embercraze/.local/bin:/run/wrappers/bin:/home/embercraze/.nix-profile/bin:/etc/profiles/per-user/embercraze/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.vicinae}/bin/vicinae server --replace";
-      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
-      Restart = "always";
-      RestartSec = 60;
-      KillMode = "process";
-    };
   };
 
   programs.tmux.keyMode = "vi";

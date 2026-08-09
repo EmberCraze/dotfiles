@@ -240,6 +240,7 @@ in
     jq
     tail-tray
     wdisplays # wayland
+    vicinae
   ];
 
   my.sharedUserExtraGroups = [ "networkmanager" "wheel" "docker" ];
@@ -283,6 +284,25 @@ in
     "x-scheme-handler/https" = "brave-current-workspace.desktop";
     "x-scheme-handler/about" = "brave-current-workspace.desktop";
     "x-scheme-handler/unknown" = "brave-current-workspace.desktop";
+  };
+
+  # Enable the packaged user unit with a PATH that exposes user-profile apps.
+  systemd.user.services.vicinae = {
+    description = "Vicinae Launcher Daemon";
+    documentation = [ "https://docs.vicinae.com" ];
+    requires = [ "dbus.socket" ];
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    environment.PATH = lib.mkForce "%h/.local/bin:/run/wrappers/bin:%h/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.vicinae}/bin/vicinae server --replace";
+      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      Restart = "always";
+      RestartSec = 60;
+      KillMode = "process";
+    };
   };
 
   hardware = {
