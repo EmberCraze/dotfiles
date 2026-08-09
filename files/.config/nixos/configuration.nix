@@ -12,16 +12,6 @@
   services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
 
-xdg.portal = {
-  enable = true;
-  extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
-  config.common.default = "*";
-  config.ScreenCast = {
-	  portal = "gnome";
-  };
-};
-
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.embercraze = {
     useDefaultShell = true;

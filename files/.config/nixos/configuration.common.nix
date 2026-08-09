@@ -290,6 +290,13 @@ in
     "x-scheme-handler/unknown" = "brave-current-workspace.desktop";
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
+    config.ScreenCast.portal = "gnome";
+  };
+
   # Enable the packaged user unit with a PATH that exposes user-profile apps.
   systemd.user.services.vicinae = {
     description = "Vicinae Launcher Daemon";
