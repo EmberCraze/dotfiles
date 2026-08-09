@@ -304,6 +304,7 @@ in
     config.ScreenCast.portal = "gnome";
   };
   services.dbus.packages = [ pkgs.nautilus ]; # Required by xdg-desktop-portal-gnome for niri
+  services.gvfs.enable = true; # for nemo remote file explorer
 
   # Enable the packaged user unit with a PATH that exposes user-profile apps.
   systemd.user.services.vicinae = {

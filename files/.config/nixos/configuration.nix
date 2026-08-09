@@ -6,7 +6,6 @@
 {
   imports = [ ./configuration.common.nix ];
 
-  services.gvfs.enable = true; # for nemo remote file explorer
   services.upower.enable = true; # for battery indicator in Dank bar
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
