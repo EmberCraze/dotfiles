@@ -11,37 +11,39 @@
     useDefaultShell = true;
     isNormalUser = true;
     extraGroups = config.my.sharedUserExtraGroups;
-    packages = config.my.sharedUserPackages ++ (with pkgs; [
-      networkmanagerapplet
-      # dunst
-      # code-cursor
-      vscode # desktop computer
-	  # piper # Logic mouse programmer
-	  # super-productivity
-	  # gemini-cli
-      # jujutsu
-      # audacity
-      inkscape
-      # blender
-      android-tools
-      scrcpy
-      telegram-desktop
-	  codex
-	  just
-	  logseq
-	  google-chrome
-    ]);
+    packages =
+      config.my.sharedUserPackages
+      ++ (with pkgs; [
+        networkmanagerapplet
+        # dunst
+        # code-cursor
+        vscode # desktop computer
+        # piper # Logic mouse programmer
+        # super-productivity
+        # gemini-cli
+        # jujutsu
+        # audacity
+        inkscape
+        # blender
+        android-tools
+        scrcpy
+        telegram-desktop
+        codex
+        just
+        logseq
+        google-chrome
+      ]);
   };
 
   nixpkgs.config.permittedInsecurePackages = [
-                "electron-37.10.3"
-				"electron-39.8.10"
-              ];
+    "electron-37.10.3"
+    "electron-39.8.10"
+  ];
 
   programs.openvpn3.enable = true;
   fonts.packages = with pkgs; [
-	poppins
-	libertinus
+    poppins
+    libertinus
   ];
 
   services.geoclue2.enable = true;
