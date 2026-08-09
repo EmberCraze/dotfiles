@@ -6,7 +6,6 @@
 {
   imports = [ ./configuration.common.nix ];
 
-  services.upower.enable = true; # for battery indicator in Dank bar
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.embercraze = {
@@ -38,6 +37,5 @@
   };
 
   programs.tmux.keyMode = "vi";
-  programs.dms-shell.enable = true;
 
 }

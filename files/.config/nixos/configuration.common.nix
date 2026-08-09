@@ -143,6 +143,7 @@ in
   services.gnome.gnome-keyring.enable = true;
   services.tailscale.enable = true;
   services.fprintd.enable = true;
+  services.upower.enable = true; # for battery indicator in Dank bar
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -188,6 +189,7 @@ in
   };
 
   programs.niri.enable = true;
+  programs.dms-shell.enable = true;
 
   my.sharedUserPackages = with pkgs; [
     neovim
