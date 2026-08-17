@@ -25,6 +25,16 @@
             }
          }
       },
+      "@knoopx/store.vicinae.nix": {
+         "entrypoints": {
+            "home-manager-options": {
+               "enabled": false
+            },
+            "pull-requests": {
+               "enabled": false
+            }
+         }
+      },
       "@thomaslombart/store.raycast.linear": {
          "enabled": true
       },
@@ -55,6 +65,22 @@
       },
       "browser-extension": {
          "enabled": false
+      },
+      "core": {
+         "entrypoints": {
+            "about": {
+               "enabled": false
+            },
+            "documentation": {
+               "enabled": false
+            },
+            "report-bug": {
+               "enabled": false
+            },
+            "sponsor": {
+               "enabled": false
+            }
+         }
       },
       "shortcuts": {
          "entrypoints": {
