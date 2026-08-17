@@ -332,7 +332,7 @@ in
       after = [ "graphical-session.target" ];
       partOf = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
-      environment.PATH = lib.mkForce "%h/.local/bin:/run/wrappers/bin:%h/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+      environment.PATH = lib.mkForce "%h/.local/bin:/run/wrappers/bin:%h/.nix-profile/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.vicinae}/bin/vicinae server --replace";
