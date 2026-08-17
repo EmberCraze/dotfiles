@@ -144,7 +144,7 @@ in
     };
 
     services.blueman.enable = false;
-    services.autorandr.enable = true;
+    services.autorandr.enable = false;
     services.acpid.enable = true;
     # services.ratbagd.enable = true; # Mouse driver
     services.pulseaudio.enable = false;
