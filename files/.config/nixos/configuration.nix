@@ -34,6 +34,11 @@
         zathura # pdf reader
         # handy
         # wtype
+		vscode
+		t3code
+        adwaita-icon-theme # DMS dock icon fallback
+        hicolor-icon-theme
+        papirus-icon-theme
       ]);
   };
 
