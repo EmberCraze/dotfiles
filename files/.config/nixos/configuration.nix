@@ -26,7 +26,7 @@
         # ansible
         ffmpeg
         vscode-json-languageserver # json lsp
-        zed-editor
+        # zed-editor
         wl-clipboard # wayland
         grim # screenshot flameshot
         # logseq # commented out because of old elektron version
