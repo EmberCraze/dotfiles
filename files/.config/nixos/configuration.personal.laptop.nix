@@ -14,7 +14,7 @@
     packages =
       config.my.sharedUserPackages
       ++ (with pkgs; [
-        networkmanagerapplet
+        # networkmanagerapplet
         # dunst
         # code-cursor
         vscode # desktop computer
