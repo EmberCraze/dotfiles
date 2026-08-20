@@ -7,5 +7,25 @@
   },
   "dankTodo": {
     "enabled": true
+  },
+  "dankActions": {
+    "enabled": true,
+    "variants": [
+      {
+        "icon": "terminal",
+        "displayText": "",
+        "displayCommand": "/home/embercraze/.config/DankMaterialShell/next-prayer-adhan.py",
+        "clickCommand": "/home/embercraze/.config/DankMaterialShell/next-prayer-adhan.py --toggle",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 5,
+        "showIcon": false,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 5,
+        "id": "variant_1787154290212",
+        "name": "Next prayer"
+      }
+    ]
   }
 }
