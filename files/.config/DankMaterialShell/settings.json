@@ -728,10 +728,6 @@
       ],
       "rightWidgets": [
         {
-          "id": "dankTodo",
-          "enabled": true
-        },
-        {
           "id": "dankPomodoroTimer",
           "enabled": true
         },
