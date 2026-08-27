@@ -64,7 +64,23 @@
         adwaita-icon-theme # DMS dock icon fallback
         hicolor-icon-theme
         papirus-icon-theme
+		(voxtype.override { onnxSupport = true; }) # onnx needed for parakeet models
       ]);
+  };
+
+  # Voxtype voice dictation daemon (recording toggled via niri Mod+V ->
+  # `voxtype record toggle`; config lives in ~/.config/voxtype/config.toml)
+  systemd.user.services.voxtype = {
+    description = "Voxtype push-to-talk voice-to-text daemon";
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      # Via the per-user profile so it always matches the installed package
+      ExecStart = "/etc/profiles/per-user/embercraze/bin/voxtype daemon";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
   };
 
   programs.tmux.keyMode = "vi";

@@ -647,6 +647,10 @@ binds {
 
     // Kill (unname) an empty named workspace; refuses if it has windows.
     Mod+Ctrl+N hotkey-overlay-title="Kill named workspace" { spawn-sh "~/.config/niri/scripts/kill-workspace"; }
+
+    // Voice dictation (voxtype): toggle recording, Ctrl variant cancels without typing.
+    Mod+V hotkey-overlay-title="Toggle voice dictation" { spawn "voxtype" "record" "toggle"; }
+    Mod+Ctrl+V hotkey-overlay-title="Cancel voice dictation" { spawn "voxtype" "record" "cancel"; }
 }
 
 // DMS Include Configs

@@ -622,6 +622,10 @@
         },
         "cpuUsage",
         "memUsage",
+        {
+          "id": "voxtypeWidget",
+          "enabled": true
+        },
         "notificationButton",
         {
           "id": "battery",

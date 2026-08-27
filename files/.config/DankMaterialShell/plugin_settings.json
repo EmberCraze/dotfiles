@@ -6,7 +6,7 @@
     "enabled": false
   },
   "dankTodo": {
-    "enabled": true
+    "enabled": false
   },
   "dankActions": {
     "enabled": true,
@@ -27,5 +27,8 @@
         "name": "Next prayer"
       }
     ]
+  },
+  "voxtypeWidget": {
+    "enabled": true
   }
 }

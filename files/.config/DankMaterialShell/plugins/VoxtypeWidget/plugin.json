@@ -1,0 +1,23 @@
+{
+    "id": "voxtypeWidget",
+    "name": "Voxtype",
+    "description": "Voice dictation status indicator: shows idle/recording/transcribing state, click to toggle recording",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "voxtype",
+    "icon": "mic",
+    "type": "widget",
+    "category": "utility",
+    "component": "./Voxtype.qml",
+    "capabilities": [
+        "dankbar-widget"
+    ],
+    "compositors": [
+        "any"
+    ],
+    "distro": [
+        "any"
+    ],
+    "dependencies": [],
+    "permissions": []
+}
