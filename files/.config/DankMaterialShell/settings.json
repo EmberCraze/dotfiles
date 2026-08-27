@@ -611,13 +611,13 @@
         }
       ],
       "rightWidgets": [
+        {
+          "id": "dankActions:variant_1787154290212",
+          "enabled": true
+        },
         "clipboard",
         {
           "id": "keyboard_layout_name",
-          "enabled": true
-        },
-        {
-          "id": "separator",
           "enabled": true
         },
         "cpuUsage",
@@ -712,7 +712,7 @@
       "leftWidgets": [
         {
           "id": "focusedWindow",
-          "enabled": true,
+          "enabled": false,
           "focusedWindowShowIcon": true
         }
       ],
@@ -729,10 +729,6 @@
       "rightWidgets": [
         {
           "id": "dankPomodoroTimer",
-          "enabled": true
-        },
-        {
-          "id": "dankActions:variant_1786631056961",
           "enabled": true
         },
         {
