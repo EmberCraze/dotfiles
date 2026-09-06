@@ -4,6 +4,31 @@
 
 { config, pkgs, ... }:
 
+let
+  orcaVersion = "1.4.197";
+  orcaAppImage = pkgs.appimageTools.extract {
+    pname = "orca";
+    version = orcaVersion;
+    src = pkgs.fetchurl {
+      url = "https://github.com/stablyai/orca/releases/download/v${orcaVersion}/orca-linux.AppImage";
+      sha256 = "0ss14scxg0l10b2mxvafcszp8m6cdnqnnr2clpx11w0z2lnldj2b";
+    };
+  };
+  orcaIde = pkgs.appimageTools.wrapAppImage {
+    pname = "orca";
+    version = orcaVersion;
+    src = orcaAppImage;
+    extraPkgs = pkgs: [ pkgs.libsecret ];
+    extraInstallCommands = ''
+      install -Dm644 ${orcaAppImage}/orca-ide.desktop \
+        $out/share/applications/orca-ide.desktop
+      cp -r ${orcaAppImage}/usr/share/icons $out/share/
+      substituteInPlace $out/share/applications/orca-ide.desktop \
+        --replace-fail "Exec=AppRun %U" "Exec=orca %U"
+    '';
+  };
+in
+
 {
   imports = [ ./configuration.common.nix ];
 
@@ -32,6 +57,7 @@
         just
         logseq
         google-chrome
+        orcaIde
       ]);
   };
 
