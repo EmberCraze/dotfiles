@@ -30,6 +30,14 @@ log "brave_window_id=$brave_window_id"
 if [ -n "$brave_window_id" ]; then
   log "action=reuse-window id=$brave_window_id"
   niri msg action focus-window --id "$brave_window_id"
+  # Wait until Brave has actually received focus, otherwise it opens the URL
+  # in its previously active window instead of this one.
+  for _ in $(seq 1 20); do
+    focused_window_id="$(niri msg -j windows | jq -r '.[] | select(.is_focused == true) | .id')"
+    [ "$focused_window_id" = "$brave_window_id" ] && break
+    sleep 0.05
+  done
+  sleep 0.1
   brave "$url" >/dev/null 2>&1 &
 else
   log "action=new-window"
