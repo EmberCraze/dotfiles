@@ -35,32 +35,6 @@
         # handy
         # wtype
 		vscode
-        # T3 web as an app-mode Brave window, launchable from vicinae
-        (makeDesktopItem {
-          name = "t3-web";
-          desktopName = "T3code";
-          genericName = "T3 Chat";
-          exec = "brave --app=https://maher01-dev-hel1.tail48d7ff.ts.net/ --ozone-platform=wayland";
-          icon = fetchurl {
-            url = "https://t3.codes/apple-touch-icon.png";
-            sha256 = "0382rb8d8757qp361nlm4gnpcbymnjis2v8kair5w9bxzmpvvwnk";
-          };
-          terminal = false;
-          categories = [ "Development" ];
-        })
-        # OpenChamber as an app-mode Brave window, launchable from vicinae
-        (makeDesktopItem {
-          name = "openchamber-web";
-          desktopName = "OpenChamber";
-          genericName = "OpenChamber";
-          exec = "brave --app=https://openchamber.maher.gigapay.dev/ --ozone-platform=wayland";
-          icon = fetchurl {
-            url = "https://openchamber.maher.gigapay.dev/apple-touch-icon.png";
-            sha256 = "0pamjqxins1bqh8k6i26sj96q91jxndh6hjx6gryymmhcmzh9w09";
-          };
-          terminal = false;
-          categories = [ "Development" ];
-        })
         adwaita-icon-theme # DMS dock icon fallback
         hicolor-icon-theme
         papirus-icon-theme
