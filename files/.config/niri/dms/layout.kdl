@@ -26,3 +26,10 @@ layer-rule {
         xray false
     }
 }
+
+window-rule {
+    match app-id="^com.danklinux.dms$"
+    background-effect {
+        xray false
+    }
+}

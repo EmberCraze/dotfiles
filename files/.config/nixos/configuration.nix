@@ -49,6 +49,11 @@
     partOf = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
     wantedBy = [ "graphical-session.target" ];
+    # The [osd] quickshell frontend execs `qs`; without it on PATH the OSD
+    # child exits immediately and the daemon gives up after 3 retries.
+    path = [ pkgs.quickshell "/etc/profiles/per-user/embercraze" ];
+    # Custom pill-style OSD (position follows osd.position in config.toml)
+    environment.VOXTYPE_OSD_QML_PATH = "/home/embercraze/.config/voxtype/osd";
     serviceConfig = {
       # Via the per-user profile so it always matches the installed package
       ExecStart = "/etc/profiles/per-user/embercraze/bin/voxtype daemon";
