@@ -27,6 +27,29 @@ let
         --replace-fail "Exec=AppRun %U" "Exec=orca %U"
     '';
   };
+
+  bbVersion = "0.47.1";
+  bbAppImage = pkgs.appimageTools.extract {
+    pname = "bb";
+    version = bbVersion;
+    src = pkgs.fetchurl {
+      url = "https://github.com/get-bb/bb/releases/download/desktop-v${bbVersion}/bb-${bbVersion}-x86_64.AppImage";
+      sha256 = "ac40a4fdf9a065ff127d39c3f8394aed2e1c79981b9f1ba416dd7bd97175d2c0";
+    };
+  };
+  bbIde = pkgs.appimageTools.wrapAppImage {
+    pname = "bb";
+    version = bbVersion;
+    src = bbAppImage;
+    extraPkgs = pkgs: [ pkgs.libsecret ];
+    extraInstallCommands = ''
+      install -Dm644 ${bbAppImage}/bb.desktop \
+        $out/share/applications/bb.desktop
+      cp -r ${bbAppImage}/usr/share/icons $out/share/
+      substituteInPlace $out/share/applications/bb.desktop \
+        --replace-fail "Exec=AppRun %U" "Exec=bb %U"
+    '';
+  };
 in
 
 {
